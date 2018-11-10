@@ -1,0 +1,8 @@
+logs
+*.png
+*.jpg
+*.dll
+PolSystemInfo_us
+res
+*.log
+*.exe

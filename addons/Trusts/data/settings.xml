@@ -1,0 +1,39 @@
+<?xml version="1.1" ?>
+<settings>
+    <global>
+        <auto>true</auto>
+        <language>English</language>
+        <sets>
+            <battle>
+                <1>Valaineral</1>
+                <2>Karaha-Baruha</2>
+                <3>Semih Lafihna</3>
+                <4>Shantotto II</4>
+            </battle>
+            <bomb>
+                <1>Rughadjeen</1>
+                <2>Karaha-Baruha</2>
+                <3>Adelheid</3>
+                <4>Ullegore</4>
+            </bomb>
+            <default>
+                <1>Brygid</1>
+                <2>Sakura</2>
+                <3>Kuyin Hathdenna</3>
+                <4>Joachim</4>
+                <5>Joachim</5>
+            </default>
+            <scary>
+                <1>Teodor</1>
+                <2>Darrcuiln</2>
+                <3>Ullegore</3>
+                <4>Abenzio</4>
+            </scary>
+        </sets>
+        <wait>
+            <aftercast>4</aftercast>
+            <retr>1.25</retr>
+            <retrall>3</retrall>
+        </wait>
+    </global>
+</settings>

@@ -1,0 +1,95 @@
+unbind f12
+unbind sysrq
+unbind ^v
+unbind ^z
+unbind !m
+unbind f1
+unbind ^1
+unbind ^2
+unbind ^3
+unbind ^4
+unbind !1
+unbind !2
+unbind !3
+unbind !4
+
+keyboard_allowmmf 1
+
+game_forceambientlight 1
+game_ambientlight 255 120 120 120
+game_gamma 50
+
+console_position 15 100
+console_color 255 255 0 0
+console_displayactivity 1
+console_fadedelay 15000
+console_screendir screenshots
+showfps 1
+fps_position 0 18
+
+reload binder
+bind f12 showfps
+bind sysrq screenshot jpg hide
+bind ^v paste
+bind ^z input /ja "Flee" <me>
+bind !m input /map
+bind f1 exec init.txt
+zbind ^1 exec ctrl-1.txt
+zbind ^2 exec ctrl-2.txt
+zbind ^3 exec ctrl-3.txt
+zbind ^4 exec ctrl-4.txt
+zbind !1 exec alt-1.txt
+zbind !2 exec alt-2.txt
+zbind !3 exec alt-3.txt
+zbind !4 exec alt-4.txt
+
+lua reload scoreboard
+sb visible on
+sb reset
+
+reload ffxidb
+reload infobar
+lua reload logger
+lua reload linker
+lua reload tparty
+lua reload trusts
+reload delaymenot
+reload timers
+lua reload clock
+lua reload debuffed 
+
+lua reload gearswap
+gs showswaps
+
+input /echo ----------- begin --------------------
+input /echo /console exec init.txt
+input /echo ,        = zoom out
+input /echo .        = zoom in
+input /echo ctrl-e   = equipment
+input /echo ctrl-i   = inventory
+input /echo ctrl-j   = job abilities
+input /echo ctrl-m   = magic
+input /echo ctrl-v   = paste
+input /echo ctrl-w   = weapon abilities
+input /echo e        = turn right
+input /echo f        = select window
+input /echo n        = cancel
+input /echo q        = turn left
+input /echo v        = change view
+input /echo y        = confirm
+input /echo ----------- end ----------------------
+listbinds
+alias blink input /ma "Utsusemi: Ichi" <me>
+alias exp input /item "Echad Ring" <me>
+alias flee input /ja "Flee" <me>
+alias hide input /ja "Hide" <me>
+alias mug input /ja "Mug" <t>
+alias pd input /ja "Perfect Dodge" <me>
+alias sa input /ja "Sneak Attack" <me>
+alias sad input /ja "Sneak Attack" <me>;input /ws "Dancing Edge" <t>
+alias steal input /ja "Steal" <t>
+alias ta input /ja "Trick Attack" <me>
+alias tad input /ja "Trick Attack" <me>;input /ws "Dancing Edge" <t>
+alias undetect exec undetectable.txt
+alias warp input /item "Warp Ring" <me>
+listaliases

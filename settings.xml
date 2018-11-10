@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <autoload>
+    <plugin>Config</plugin>
+  </autoload>
+  <profile name="">
+    <consolekey>Insert</consolekey>
+    <uiscale>1</uiscale>
+    <alwaysenablegamepad>false</alwaysenablegamepad>
+    <allowwinkey>true</allowwinkey>
+    <logs>4</logs>
+  </profile>
+</settings>
