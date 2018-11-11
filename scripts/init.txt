@@ -6,18 +6,14 @@ unbind !m
 unbind f1
 unbind ^1
 unbind ^2
-unbind ^3
-unbind ^4
-unbind !1
-unbind !2
-unbind !3
-unbind !4
 
 keyboard_allowmmf 1
 
 game_forceambientlight 1
 game_ambientlight 255 120 120 120
 game_gamma 50
+game_exittype 1
+game_exitprompt 0
 
 console_position 15 100
 console_color 255 255 0 0
@@ -34,15 +30,8 @@ bind ^v paste
 bind ^z input /ja "Flee" <me>
 bind !m input /map
 bind f1 exec init.txt
-zbind ^1 exec ctrl-1.txt
-zbind ^2 exec ctrl-2.txt
-zbind ^3 exec ctrl-3.txt
-zbind ^4 exec ctrl-4.txt
-zbind !1 exec alt-1.txt
-zbind !2 exec alt-2.txt
-zbind !3 exec alt-3.txt
-zbind !4 exec alt-4.txt
-
+bind ^1 input /check <t>
+bind ^2 input /ra <t>
 lua reload scoreboard
 sb visible on
 sb reset
@@ -57,6 +46,7 @@ reload delaymenot
 reload timers
 lua reload clock
 lua reload debuffed 
+lua reload giltracker
 
 lua reload gearswap
 gs showswaps
@@ -92,4 +82,7 @@ alias ta input /ja "Trick Attack" <me>
 alias tad input /ja "Trick Attack" <me>;input /ws "Dancing Edge" <t>
 alias undetect exec undetectable.txt
 alias warp input /item "Warp Ring" <me>
+input /echo terminate=force close playonline
+input /echo game_exit=exits the game gracefully
+input /echo window_toggleframe=toggles the window border frame
 listaliases
