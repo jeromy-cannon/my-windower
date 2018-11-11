@@ -6,3 +6,5 @@ PolSystemInfo_us
 res
 *.log
 *.exe
+/guides/**
+/guides/**/**
