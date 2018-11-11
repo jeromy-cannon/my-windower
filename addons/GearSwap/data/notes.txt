@@ -1,0 +1,1 @@
+if _global.debug_mode then add_to_chat(123,'Debug: ') end
