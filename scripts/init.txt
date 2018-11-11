@@ -1,12 +1,3 @@
-unbind f12
-unbind sysrq
-unbind ^v
-unbind ^z
-unbind !m
-unbind f1
-unbind ^1
-unbind ^2
-
 keyboard_allowmmf 1
 
 game_forceambientlight 1
@@ -23,30 +14,21 @@ console_screendir screenshots
 showfps 1
 fps_position 0 18
 
-reload binder
-bind f12 showfps
-bind sysrq screenshot jpg hide
-bind ^v paste
-bind ^z input /ja "Flee" <me>
-bind !m input /map
-bind f1 exec init.txt
-bind ^1 input /check <t>
-bind ^2 input /ra <t>
-lua reload scoreboard
-sb visible on
-sb reset
-
+reload delaymenot
 reload ffxidb
 reload infobar
-lua reload logger
-lua reload linker
-lua reload tparty
-lua reload trusts
-reload delaymenot
 reload timers
 lua reload clock
 lua reload debuffed 
 lua reload giltracker
+lua reload linker
+lua reload logger
+lua reload tparty
+lua reload trusts
+
+lua reload scoreboard
+sb visible on
+sb reset
 
 lua reload gearswap
 gs showswaps
@@ -68,7 +50,19 @@ input /echo q        = turn left
 input /echo v        = change view
 input /echo y        = confirm
 input /echo ----------- end ----------------------
+
+clearbinds
+bind f12 showfps
+bind sysrq screenshot jpg hide
+bind ^v paste
+bind ^z input /ja "Flee" <me>
+bind !m input /map
+bind f1 exec init.txt
+bind ^1 input /check <t>
+bind ^2 input /ra <t>
 listbinds
+
+clearaliases
 alias blink input /ma "Utsusemi: Ichi" <me>
 alias exp input /item "Echad Ring" <me>
 alias flee input /ja "Flee" <me>
