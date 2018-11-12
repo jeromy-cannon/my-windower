@@ -28,7 +28,6 @@ lua reload tparty
 lua reload trusts
 
 lua reload scoreboard
-sb visible on
 sb reset
 
 lua reload gearswap
