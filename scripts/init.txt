@@ -77,6 +77,27 @@ alias ta input /ja "Trick Attack" <me>
 alias tad input /ja "Trick Attack" <me>;input /ws "Dancing Edge" <t>
 alias undetect exec undetectable.txt
 alias warp input /item "Warp Ring" <me>
+alias qstep input /ja "Quickstep" <t>;input /echo Quickstep:100:Lowers target's evasion. If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Moves. 
+alias bstep input /ja "Box Step" <t>;input /echo BoxStep:100:Lowers target's defense. If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Move. 
+alias sstep input /ja "Stutter Step" <t>;input /echo StutterStep:100:Applies Weakened Daze. Lowers the targets magic resistance. If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Move. 
+alias dsam input /ja "Drain Samba" <t>;input /echo DrainSamba:100:Inflicts the next target you strike with Drain daze, allowing all those engaged in battle with it to drain its HP. 
+alias asam input /ja "Aspir Samba" <t>;input /echo AspirSamba:100:Inflicts the next target you strike with Aspir daze, allowing all those engaged in battle with it to drain its MP. 
+alias dsam2 input /ja "Drain Samba II" <t>;input /echo DrainSambaII:250:Inflicts the next target you strike with Drain Daze, allowing all those engaged in battle with it to drain its HP. 
+alias hsam input /ja "Haste Samba" <t>;input /echo HasteSamba:350:Inflicts the next target you strike with Haste daze, increasing the attack speed of all those engaged in battle with it. 
+alias cwal input /ja "Curing Waltz" <stpt>;input /echo CuringWaltz:200:Heals HP of target player. 
+alias dwal input /ja "Divine Waltz" <stpt>;input /echo DivineWaltz:400:Heals party members within area of effect. 
+alias cwal2 input /ja "Curing Waltz II" <stpt>;input /echo CuringWaltzII:350:Heals HP of target player. 
+alias hwal input /ja "Healing Waltz" <stpt>;input /echo HealingWaltz:200:Removes one detrimental status effect from target party member. 
+alias cwal3 input /ja "Curing Waltz III" <stpt>;input /echo CuringWaltzIII:500:Heals HP of target player. 
+alias sjig input /ja "Spectral Jig" <me>;input /echo SpectalJig:0:Allows you to evade enemies by making you undetectable by sight and sound. 
+alias aflour input /ja "Animated Flourish" <t>;input /echo AnimatedFlourish:1-2:Provokes the target. Requires at least one, but uses two Finishing Moves. 
+alias dflour input /ja "Desperate Flourish" <t>;input /echo DesperateFlourish:1:Weighs down a target with a low rate of success. Requires one Finishing Move. 
+alias vflour input /ja "Violent Flourish" <t>;input /echo ViolentFlourish:1:Stuns target with a low rate of success. Requires one Finishing Move. 
+alias rflour input /ja "Reverse Flourish" <me>;input /echo ReverseFlourish:1-5:Converts remaining finishing moves into TP. Requires at least one Finishing Move. 
+alias trance input /ja "Trance" <me>
+alias wasp input /ws "Wasp Sting" <t>
+alias gust input /ws "Gust Slash" <t>
+alias shadow input /ws "Shadowstitch" <t>
 input /echo terminate=force close playonline
 input /echo game_exit=exits the game gracefully
 input /echo window_toggleframe=toggles the window border frame

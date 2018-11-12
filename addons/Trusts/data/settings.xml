@@ -29,6 +29,12 @@
                 <3>Ullegore</3>
                 <4>Abenzio</4>
             </scary>
+            <solo>
+                <1>Karaha-Baruha</1>
+                <2>Joachim</2>
+                <3>Brygid</3>
+                <4>Sakura</4>
+            </solo>
         </sets>
         <wait>
             <aftercast>4</aftercast>
