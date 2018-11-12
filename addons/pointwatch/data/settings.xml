@@ -12,7 +12,7 @@
         <text_box_settings>
             <bg>
                 <alpha>255</alpha>
-                <blue>0</blue>
+                <blue>0</blue>          <!-- <font>Consolas</font> -->
                 <green>0</green>
                 <red>0</red>
                 <visible>true</visible>
@@ -31,8 +31,7 @@
             </pos>
             <text>
                 <alpha>255</alpha>
-                <blue>255</blue>
-                <!--<font>Consolas</font>-->
+                <blue>255</blue>   <!-- <font>Consolas</font> -->
                 <font>Arial</font>
                 <fonts>
 
@@ -42,7 +41,7 @@
                 <size>8</size>
                 <stroke>
                     <alpha>255</alpha>
-                    <blue>0</blue>
+                    <blue>0</blue>     <!-- <font>Consolas</font> -->
                     <green>0</green>
                     <red>0</red>
                     <width>0</width>

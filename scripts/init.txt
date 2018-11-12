@@ -23,6 +23,7 @@ lua reload debuffed
 lua reload giltracker
 lua reload linker
 lua reload logger
+lua reload pointwatch
 lua reload tparty
 lua reload trusts
 
