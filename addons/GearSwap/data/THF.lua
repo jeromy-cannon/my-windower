@@ -191,6 +191,7 @@ function init_gear_sets()
 
 
     -- Waltz set (chr and vit)
+    -- Amount Healed = floor(((Target's VIT + Caster's CHR)*0.125 + 60),1) 
     sets.precast.Waltz = {}
 
     -- Don't need any special gear for Healing Waltz.
