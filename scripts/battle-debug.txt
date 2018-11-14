@@ -1,0 +1,19 @@
+lua unload giltracker
+lua unload linker
+lua unload pointwatch
+lua unload tparty
+lua unload scoreboard
+
+load delaymenot
+load ffxidb
+load infobar
+load timers
+lua load clock
+lua load debuffed 
+lua load logger
+lua load pointwatch
+lua load tparty
+lua load scoreboard
+sb reset
+sb visible on
+gs showswaps

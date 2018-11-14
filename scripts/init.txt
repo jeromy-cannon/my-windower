@@ -14,24 +14,8 @@ console_screendir screenshots
 showfps 1
 fps_position 0 18
 
-reload delaymenot
-reload ffxidb
-reload infobar
-reload timers
-lua reload clock
-lua reload debuffed 
-lua reload giltracker
-lua reload linker
-lua reload logger
-lua reload pointwatch
-lua reload tparty
-lua reload trusts
-
-lua reload scoreboard
-sb reset
-
-lua reload gearswap
-gs showswaps
+exec expore.txt
+lua load gearswap
 
 bind f12 showfps
 bind sysrq screenshot jpg hide
@@ -40,31 +24,35 @@ bind ^z input /ja "Flee" <me>
 bind !m input /map
 bind f1 exec help.txt
 
-alias provoke exec a-flour.txt
 alias aspir exec a-sam.txt
+alias battle-bare exec battle-bare.txt
+alias battle-debug exec battle-debug.txt
 alias blink input /ma "Utsusemi: Ichi" <me>
-alias defdown exec b-step.txt
+alias cura exec d-waltz.txt
 alias cure exec cure-waltz.txt
 alias cure2 exec cure-waltz-2.txt
 alias cure3 exec cure-waltz-3.txt
 alias cyclone input /ws "Cyclone" <t>
+alias defdown exec b-step.txt
 alias dem exec dem.txt
-alias gravity exec d-flour.txt
 alias dodge input /ja "Perfect Dodge" <me>
 alias drain exec d-sam.txt
 alias drain2 exec d-sam-2.txt
-alias cura exec d-waltz.txt
+alias erase exec h-waltz.txt
+alias evadown exec q-step.txt
 alias exp input /item "Echad Ring" <me>
 alias exp2 exec exp2.txt
+alias explore exec explore.txt
 alias feint input /ja "Feint" <me>
 alias flee input /ja "Flee" <me>
+alias gravity exec d-flour.txt
 alias gust input /ws "Gust Slash" <t>
 alias hide input /ja "Hide" <me>
 alias hsam exec haste-samba.txt
-alias erase exec h-waltz.txt
 alias mug input /ja "Mug" <t>
 alias panic exec panic.txt
-alias evadown exec q-step.txt
+alias provoke exec a-flour.txt
+alias pull input /ra <t>
 alias rflour exec r-flour.txt
 alias sa input /ja "Sneak Attack" <me>
 alias sa-vb exec sa-vb.txt
@@ -81,7 +69,6 @@ alias ta input /ja "Trick Attack" <me>
 alias tad exec ta-d.txt
 alias tasb exec ta-sb.txt
 alias undetect exec undetectable.txt
+alias unload-all exec unload-all.txt
 alias vb input /ws "Viper Bite" <t>
 alias vflour exec v-flour.txt
-alias warp input /item "Warp Ring" <me>
-alias wasp input /ws "Wasp Sting" <t>

@@ -2,5 +2,5 @@ input /echo SA-VB:<tp>:Deals double damage and Poisons target. Duration of poiso
 input /ja "Assassin's Charge" <me>
 wait 1
 input /ja "Sneak Attack" <me>
-wait 1
+wait 2
 input /ws "Viper Bite" <t>

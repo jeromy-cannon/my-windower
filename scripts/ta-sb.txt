@@ -2,5 +2,5 @@ input /echo TA-SB:<tp>:Delivers a fivefold attack. Accuracy varies with TP
 input /ja "Assassin's Charge" <me>
 wait 1
 input /ja "Trick Attack" <me>
-wait 1
+wait 2
 input /ws "Shark Bite" <t>
