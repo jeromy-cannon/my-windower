@@ -57,9 +57,9 @@ bind sysrq screenshot jpg hide
 bind ^v paste
 bind ^z input /ja "Flee" <me>
 bind !m input /map
-bind f1 exec init.txt
 bind ^1 input /check <t>
 bind ^2 input /ra <t>
+bind f1 listbinds;listaliases
 listbinds
 
 clearaliases
@@ -80,7 +80,7 @@ alias tad input /ja "Trick Attack" <me>;wait 2;input /ws "Dancing Edge" <t>
 alias undetect exec undetectable.txt
 alias warp input /item "Warp Ring" <me>
 alias hsam input /ja "Haste Samba" <me>;input /echo HasteSamba:L45:350:Inflicts the next target you strike with Haste daze, increasing the attack speed of all those engaged in battle with it. 
-alias cwal3 input /ja "Curing Waltz III" <stpt>;input /echo CuringWaltzIII:L45:500:Heals HP of target player. 
+alias cwaliii input /ja "Curing Waltz III" <stpt>;input /echo CuringWaltzIII:L45:500:Heals HP of target player. 
 alias vflour input /ja "Violent Flourish" <t>;input /echo ViolentFlourish:L45:1:Stuns target with a low rate of success. Requires one Finishing Move. 
 alias rflour input /ja "Reverse Flourish" <me>;input /echo ReverseFlourish:L40:1-5:Converts remaining finishing moves into TP. Requires at least one Finishing Move. 
 alias sstep input /ja "Stutter Step" <t>;input /echo StutterStep:L40:100:Applies Weakened Daze. Lowers the targets magic resistance. If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Move. 
@@ -88,10 +88,10 @@ alias qstep input /ja "Quickstep" <t>;input /echo Quickstep:L20:100:Lowers targe
 alias bstep input /ja "Box Step" <t>;input /echo BoxStep:L30:100:Lowers target's defense. If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Move. 
 alias dsam input /ja "Drain Samba" <me>;input /echo DrainSamba:L5:100:Inflicts the next target you strike with Drain daze, allowing all those engaged in battle with it to drain its HP. 
 alias asam input /ja "Aspir Samba" <me>;input /echo AspirSamba:L25:100:Inflicts the next target you strike with Aspir daze, allowing all those engaged in battle with it to drain its MP. 
-alias dsam2 input /ja "Drain Samba II" <me>;input /echo DrainSambaII:L35:250:Inflicts the next target you strike with Drain Daze, allowing all those engaged in battle with it to drain its HP. 
+alias dsamii input /ja "Drain Samba II" <me>;input /echo DrainSambaII:L35:250:Inflicts the next target you strike with Drain Daze, allowing all those engaged in battle with it to drain its HP. 
 alias cwal input /ja "Curing Waltz" <stpt>;input /echo CuringWaltz:L15:200:Heals HP of target player. 
 alias dwal input /ja "Divine Waltz" <stpt>;input /echo DivineWaltz:L25:400:Heals party members within area of effect. 
-alias cwal2 input /ja "Curing Waltz II" <stpt>;input /echo CuringWaltzII:L30:350:Heals HP of target player. 
+alias cwalii input /ja "Curing Waltz II" <stpt>;input /echo CuringWaltzII:L30:350:Heals HP of target player. 
 alias hwal input /ja "Healing Waltz" <stpt>;input /echo HealingWaltz:L35:200:Removes one detrimental status effect from target party member. 
 alias sjig input /ja "Spectral Jig" <me>;input /echo SpectalJig:L25:0:Allows you to evade enemies by making you undetectable by sight and sound. 
 alias aflour input /ja "Animated Flourish" <t>;input /echo AnimatedFlourish:L20:1-2:Provokes the target. Requires at least one, but uses two Finishing Moves. 
@@ -102,4 +102,8 @@ alias gust input /ws "Gust Slash" <t>
 alias sags input /ja "Sneak Attack" <me>;wait 2;input /ws "Gust Slash" <t>
 alias shadow input /ws "Shadowstitch" <t>
 alias sas input /ja "Sneak Attack" <me>;wait 2;input /ws "Shadowstitch" <t>
+alias sharkbite input /ws "Shark Bite" <t>
+alias sasb input /ja "Sneak Attack" <me>;wait 2;input /ws "Shark Bite" <t>
+alias dem input /equip R.ring "Dem Ring";wait 5;input /item "Dem Ring" <me>;wait 10;input /equip R.ring "Warp Ring"
+alias exp2 input /equip R.ring "Emperor Band";wait 5;input /item "Emperor Band" <me>;wait 10;input /equip R.ring "Warp Ring"
 listaliases

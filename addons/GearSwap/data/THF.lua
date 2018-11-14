@@ -46,8 +46,8 @@ function user_setup()
     state.PhysicalDefenseMode:options('Evasion', 'PDT')
 
 
-    gear.default.weaponskill_neck = "Spike Necklace" -- STR +3 DEX +3 MND -6
-    gear.default.weaponskill_waist = "Key Ring Belt" -- DEF: 2 DEX +1 "Steal" +1
+    --gear.default.weaponskill_neck = "Spike Necklace" -- STR +3 DEX +3 MND -6
+    --gear.default.weaponskill_waist = "Key Ring Belt" -- DEF: 2 DEX +1 "Steal" +1
     --gear.AugQuiahuiz = {name="Quiahuiz Trousers", augments={'Haste+2','"Snapshot"+2','STR+8'}}
 
     -- Additional local binds
@@ -231,7 +231,7 @@ function init_gear_sets()
         neck="Spike Necklace", -- STR +3 DEX +3 MND -6
         body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
         back="Sniper's Mantle", -- DEF: 4 Attack +2 Ranged Attack +1
-        waist="Key Ring Belt", -- DEF: 2 DEX +1 "Steal" +1
+        waist="Life Belt", -- Accuracy +10
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
@@ -354,7 +354,7 @@ function init_gear_sets()
         right_ear="Fang Earring", -- Attack +4 Evasion -4
         neck="Spike Necklace", -- STR +3 DEX +3 MND -6
         body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
-        waist="Key Ring Belt", -- DEF: 2 DEX +1 "Steal" +1
+        waist="Life Belt", -- Accuracy +10
         hands="Lgn. Mittens", -- DEF: 3 Attack +3
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
@@ -364,6 +364,7 @@ function init_gear_sets()
     sets.engaged.Acc = {
         head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
         body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
+        waist="Life Belt", -- Accuracy +10
         feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
     }
         
@@ -391,6 +392,7 @@ function init_gear_sets()
     sets.engaged.Acc.PDT = {
         head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
         body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
+        waist="Life Belt", -- Accuracy +10
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7

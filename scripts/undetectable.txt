@@ -3,5 +3,5 @@ input /item "Silent Oil" <me>
 wait 5
 input /item "Deodorizer" <me>
 wait 5
-input /item "Prism Powder"
+input /item "Prism Powder" <me>
 input /echo undetectable:end
