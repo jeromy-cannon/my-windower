@@ -461,13 +461,10 @@ function equip_gear_by_status(playerStatus, petStatus)
     -- If status not defined, treat as idle.
     -- Be sure to check for positive HP to make sure they're not dead.
     if (playerStatus == 'Idle' or playerStatus == '') and player.hp > 0 then
-        if _global.debug_mode then add_to_chat(123,'Debug: get_idle_set') end
         equip(get_idle_set(petStatus))
     elseif playerStatus == 'Engaged' then
-        if _global.debug_mode then add_to_chat(123,'Debug: get_melee_set') end
         equip(get_melee_set(petStatus))
     elseif playerStatus == 'Resting' then
-        if _global.debug_mode then add_to_chat(123,'Debug: get_resting_set') end
         equip(get_resting_set(petStatus))
     end
 end
@@ -497,13 +494,10 @@ function get_idle_set(petStatus)
 
     if buffactive.weakness then
         idleScope = 'Weak'
-        if _global.debug_mode then add_to_chat(123,'Debug: if buffactive.weakness then') end
     elseif areas.Cities:contains(world.area) then
         idleScope = 'Town'
-        if _global.debug_mode then add_to_chat(123,'Debug: elseif areas.Cities:contains(world.area) then') end
     else
         idleScope = 'Field'
-        if _global.debug_mode then add_to_chat(123,'Debug: not weakness and not town') end
     end
 
     if idleSet[idleScope] then
