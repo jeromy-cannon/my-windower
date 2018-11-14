@@ -64,7 +64,6 @@ alias hsam exec haste-samba.txt
 alias erase exec h-waltz.txt
 alias mug input /ja "Mug" <t>
 alias panic exec panic.txt
-alias pd input /ja "Perfect Dodge" <me>
 alias evadown exec q-step.txt
 alias rflour exec r-flour.txt
 alias sa input /ja "Sneak Attack" <me>
