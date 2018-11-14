@@ -1,0 +1,23 @@
+input /echo ----------- begin --------------------
+input /echo /console exec init.txt
+input /echo ,        = zoom out
+input /echo .        = zoom in
+input /echo ctrl-e   = equipment
+input /echo ctrl-i   = inventory
+input /echo ctrl-j   = job abilities
+input /echo ctrl-m   = magic
+input /echo ctrl-v   = paste
+input /echo ctrl-w   = weapon abilities
+input /echo e        = turn right
+input /echo f        = select window
+input /echo n        = cancel
+input /echo q        = turn left
+input /echo v        = change view
+input /echo y        = confirm
+input /echo terminate=force close playonline
+input /echo game_exit=exits the game gracefully
+input /echo window_toggleframe=toggles the window border frame
+input /echo gs export all=export the name of all of your equipment and items
+input /echo ----------- end ----------------------
+listbinds
+listaliases

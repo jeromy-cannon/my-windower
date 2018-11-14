@@ -1,0 +1,2 @@
+input /echo AspirSamba:L25:100:Inflicts the next target you strike with Aspir daze, allowing all those engaged in battle with it to drain its MP. 
+input /ja "Aspir Samba" <me>

@@ -1,0 +1,2 @@
+input /echo CuringWaltzII:L30:350:Heals HP of target player. 
+input /ja "Curing Waltz II" <stpt>

@@ -1,0 +1,2 @@
+input /echo ViolentFlourish:L45:1:Stuns target with a low rate of success. Requires one Finishing Move. 
+input /ja "Violent Flourish" <t>

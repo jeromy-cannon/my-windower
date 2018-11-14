@@ -1,0 +1,2 @@
+input /echo HasteSamba:L45:350:Inflicts the next target you strike with Haste daze, increasing the attack speed of all those engaged in battle with it. 
+input /ja "Haste Samba" <me>

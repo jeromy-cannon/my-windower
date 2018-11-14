@@ -1,0 +1,4 @@
+input /echo Panic!!!
+dodge
+wait 1
+warp

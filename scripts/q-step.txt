@@ -1,0 +1,3 @@
+input /echo Quickstep:L20:100:Lowers target's evasion. 
+input /echo If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Moves. 
+input /ja "Quickstep" <t>

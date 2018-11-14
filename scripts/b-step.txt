@@ -1,0 +1,3 @@
+input /echo BoxStep:L30:100:Lowers target's defense. 
+input /echo If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Move. 
+input /ja "Box Step" <t>

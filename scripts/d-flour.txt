@@ -1,0 +1,2 @@
+input /echo DesperateFlourish:L30:1:Weighs down a target with a low rate of success. Requires one Finishing Move. 
+input /ja "Desperate Flourish" <t>

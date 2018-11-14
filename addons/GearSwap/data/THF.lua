@@ -128,14 +128,14 @@ function init_gear_sets()
         left_ear="Fang Earring", -- Attack +4 Evasion -4
         right_ear="Fang Earring", -- Attack +4 Evasion -4
         neck="Spike Necklace", -- STR +3 DEX +3 MND -6
-        body="Black Cotehardie", -- DEF: 39 STR +3 DEX +2 VIT -2 AGI +3 INT +2 MND -3 CHR -3  Fire-30  Ice+3  Wind+3  Earth+3  Lightning+3  Water+3  Light+3  Dark+3 Converts 25 HP to MP
-        back="Rep. Army Mantle", -- DEF: 6 HP +6 DEX +2 VIT +2
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        back="Cuchulain's Mantle", -- DEF: 8 STR +4 DEX +4 Accuracy +5
         waist="Key Ring Belt", -- DEF: 2 DEX +1 "Steal" +1
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
-        legs="Noct Brais", -- DEF: 12 DEX +1  Dark+1 Ranged Accuracy +1
-        feet="Bounding Boots", -- DEF: 3 DEX +3 AGI +3
+        legs="Dragon Subligar", -- DEF: 32 DEX +4 "Subtle Blow" +5 Breath damage taken -3% Enmity +2
+        feet="Adsilio Boots +1", -- DEF:14 DEX +5 AGI +5 Accuracy +3 Haste +1%
     }
 
     -- For Trick Attack: Damage = (Base Damage + Total AGI) x pDIF 
@@ -146,13 +146,14 @@ function init_gear_sets()
         left_ear="Fang Earring", -- Attack +4 Evasion -4
         right_ear="Fang Earring", -- Attack +4 Evasion -4
         neck="Spike Necklace", -- STR +3 DEX +3 MND -6
-        body="Black Cotehardie", -- DEF: 39 STR +3 DEX +2 VIT -2 AGI +3 INT +2 MND -3 CHR -3  Fire-30  Ice+3  Wind+3  Earth+3  Lightning+3  Water+3  Light+3  Dark+3 Converts 25 HP to MP
-        back="Sniper's Mantle", -- DEF: 4 Attack +2 Ranged Attack +1
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        back="Cerberus Mantle", -- DEF: 12 STR +3 Trans Fire+10 Attack +12 Enmity +3
+        waist="Scouter's Rope", -- DEF: 6 HP -40 AGI +4 Evasion +10
         hands="Lgn. Mittens", -- DEF: 3 Attack +3
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
         legs="Rogue's Culottes", -- DEF: 32 HP +15 AGI +4 Shield skill +10 "Steal" +1
-        feet="Bounding Boots", -- DEF: 3 DEX +3 AGI +3
+        feet="Adsilio Boots +1", -- DEF:14 DEX +5 AGI +5 Accuracy +3 Haste +1%
     }
 
     -- Actions we want to use to tag TH.
@@ -182,7 +183,7 @@ function init_gear_sets()
         legs="Rogue's Culottes", -- DEF: 32 HP +15 AGI +4 Shield skill +10 "Steal" +1
         feet="Rogue's Poulaines", -- DEF: 13 HP +12 DEX +3 Increases "Flee" duration "Steal" +2
     }
-    sets.precast.JA['Despoil'] = {}
+    sets.precast.JA['Despoil'] = sets.precast.JA['Steal']
     sets.precast.JA['Perfect Dodge'] = {}
     sets.precast.JA['Feint'] = {}
 
@@ -192,7 +193,10 @@ function init_gear_sets()
 
     -- Waltz set (chr and vit)
     -- Amount Healed = floor(((Target's VIT + Caster's CHR)*0.125 + 60),1) 
-    sets.precast.Waltz = {}
+    sets.precast.Waltz = {
+        body="Savage Separates", -- DEF: 18 HP +32 STR +1 CHR +1
+        feet="Savage Gaiters", -- DEF: 5 HP +16 STR +3 CHR +2
+    }
 
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -217,33 +221,51 @@ function init_gear_sets()
     -- Weaponskill sets
 
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {}
+    -- focus on attack and strength, assume guaranteed hit
+    sets.precast.WS = {
+        ammo="Bomb Core", -- Fire-6 Attack +12
+        head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
+        back="Cerberus Mantle", -- DEF: 12 STR +3 Trans Fire+10 Attack +12 Enmity +3
+        left_ear="Fang Earring", -- Attack +4 Evasion -4
+        right_ear="Fang Earring", -- Attack +4 Evasion -4
+    }
     --sets.precast.WS.Acc = set_combine(sets.precast.WS, {ammo="Honed Tathlum", back="Letalis Mantle"})
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
+    -- sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     -- dancing edge: first hit DEX(40%)/CHR(40%), use accuracy to increase more hits to connect
     sets.precast.WS['Dancing Edge'] = set_combine(sets.precast.WS, {
-        ammo="Bomb Core", -- Fire-6 Attack +12
-        head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
-        left_ear="Fang Earring", -- Attack +4 Evasion -4
-        right_ear="Fang Earring", -- Attack +4 Evasion -4
         neck="Spike Necklace", -- STR +3 DEX +3 MND -6
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
-        back="Sniper's Mantle", -- DEF: 4 Attack +2 Ranged Attack +1
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        back="Cuchulain's Mantle", -- DEF: 8 STR +4 DEX +4 Accuracy +5
         waist="Life Belt", -- Accuracy +10
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
-        legs="Noct Brais", -- DEF: 12 DEX +1  Dark+1 Ranged Accuracy +1
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
+        legs="Dragon Subligar", -- DEF: 32 DEX +4 "Subtle Blow" +5 Breath damage taken -3% Enmity +2
+        feet="Adsilio Boots +1", -- DEF:14 DEX +5 AGI +5 Accuracy +3 Haste +1%
     })
-    sets.precast.WS['Dancing Edge'].Acc = set_combine(sets.precast.WS['Dancing Edge'], {})
-    sets.precast.WS['Dancing Edge'].Mod = set_combine(sets.precast.WS['Dancing Edge'], {})
-    sets.precast.WS['Dancing Edge'].SA = set_combine(sets.precast.WS['Dancing Edge'].Mod, {})
-    sets.precast.WS['Dancing Edge'].TA = set_combine(sets.precast.WS['Dancing Edge'].Mod, {})
-    sets.precast.WS['Dancing Edge'].SATA = set_combine(sets.precast.WS['Dancing Edge'].Mod, {})
+    -- sets.precast.WS['Dancing Edge'].Acc = set_combine(sets.precast.WS['Dancing Edge'], {})
+    -- sets.precast.WS['Dancing Edge'].Mod = set_combine(sets.precast.WS['Dancing Edge'], {})
+    -- sets.precast.WS['Dancing Edge'].SA = set_combine(sets.precast.WS['Dancing Edge'].Mod, {})
+    -- sets.precast.WS['Dancing Edge'].TA = set_combine(sets.precast.WS['Dancing Edge'].Mod, {})
+    -- sets.precast.WS['Dancing Edge'].SATA = set_combine(sets.precast.WS['Dancing Edge'].Mod, {})
 
+    -- Delivers a twofold attack. Damage varies with TP. 
+    -- Modifiers: 	DEX:40% AGI:40% 
+    sets.precast.WS["Shark Bite"] = set_combine(sets.precast.WS, {
+        range="Long Boomerang", -- DMG: 18 Delay: 294 AGI +2
+        head="Noct Beret", -- DEF: 9 AGI +1  Dark+1
+        neck="Spike Necklace", -- STR +3 DEX +3 MND -6
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        back="Cuchulain's Mantle", -- DEF: 8 STR +4 DEX +4 Accuracy +5
+        waist="Scouter's Rope", -- DEF: 6 HP -40 AGI +4 Evasion +10
+        hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
+        left_ring="Fluorite Ring", -- DEX +3  Lightning+7
+        right_ring="Fluorite Ring", -- DEX +3  Lightning+7
+        legs="Dragon Subligar", -- DEF: 32 DEX +4 "Subtle Blow" +5 Breath damage taken -3% Enmity +2
+        feet="Adsilio Boots +1", -- DEF:14 DEX +5 AGI +5 Accuracy +3 Haste +1%
+    })
 
     --------------------------------------
     -- Midcast sets
@@ -272,8 +294,8 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {
-        main="Avis",  -- DMG: 23 Delay: 201 CHR +2 Latent effect: Accuracy +6 (Active with any Samba effect active. Samba must have been used by wearer. Active on Weaponskills. )
-        sub="Lust Dagger", -- DMG: 20 Delay: 201 STR -1 DEX -1 VIT -1 AGI +7 INT -1 MND -1 CHR -1
+        main="Martial Knife", -- DMG: 27 Delay: 186 TP Bonus - adds 1000%TP if in Main hand during weaponskill
+        sub="Stylet", -- DMG: 31 Delay: 195 DEX +4 AGI +2 Enmity +1
         ammo="Bomb Core", -- Fire-6 Attack +12
         head="Rogue's Bonnet", -- DEF: 23 HP +13 INT +5 Parrying skill +10 "Steal" +1
         left_ear="Fang Earring", -- Attack +4 Evasion -4
@@ -308,7 +330,8 @@ function init_gear_sets()
     sets.defense.Evasion = {
         left_ear="Dodge Earring", -- Evasion +3
         right_ear="Dodge Earring", -- Evasion +3
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        waist="Scouter's Rope", -- DEF: 6 HP -40 AGI +4 Evasion +10
         feet="Areion Boots", -- DEF:4 AGI+2 Movement speed +12% Latent effect: "Flee", (Flee activates ~10% of the time when hit.)
     }
 
@@ -317,26 +340,24 @@ function init_gear_sets()
         left_ear="Dodge Earring", -- Evasion +3
         right_ear="Dodge Earring", -- Evasion +3
         neck="Elemental Charm", -- Fire+6 Ice+6 Wind+6 Earth+6 Lightning+6 Water+6
-        body="Rogue's Vest", -- DEF: 44 HP +20 STR +3  Earth+10 Increases "Hide" duration
-        back="Rep. Army Mantle", -- DEF: 6 HP +6 DEX +2 VIT +2
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        back="Cerberus Mantle", -- DEF: 12 STR +3 Trans Fire+10 Attack +12 Enmity +3
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
         legs="Rogue's Culottes", -- DEF: 32 HP +15 AGI +4 Shield skill +10 "Steal" +1
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
+        feet="Adsilio Boots +1", -- DEF:14 DEX +5 AGI +5 Accuracy +3 Haste +1%
     }
 
     sets.defense.MDT = {
         head="Green Ribbon +1", -- all elements +10
-        left_ear="Dodge Earring", -- Evasion +3
         right_ear="Amber Earring", -- Earth+2 Lightning+2
         neck="Elemental Charm", -- Fire+6 Ice+6 Wind+6 Earth+6 Lightning+6 Water+6
         body="Rogue's Vest", -- DEF: 44 HP +20 STR +3  Earth+10 Increases "Hide" duration
+        back="Cerberus Mantle", -- DEF: 12 STR +3 Fire+10 Attack +12 Enmity +3
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
-        legs="Rogue's Culottes", -- DEF: 32 HP +15 AGI +4 Shield skill +10 "Steal" +1
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
     }
 
 
@@ -346,27 +367,22 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {
-        main="Avis",  -- DMG: 23 Delay: 201 CHR +2 Latent effect: Accuracy +6 (Active with any Samba effect active. Samba must have been used by wearer. Active on Weaponskills. )
-        sub="Lust Dagger", -- DMG: 20 Delay: 201 STR -1 DEX -1 VIT -1 AGI +7 INT -1 MND -1 CHR -1
+        main="Martial Knife", -- DMG: 27 Delay: 186 TP Bonus - adds 1000%TP if in Main hand during weaponskill
+        sub="Stylet", -- DMG: 31 Delay: 195 DEX +4 AGI +2 Enmity +1
         ammo="Bomb Core", -- Fire-6 Attack +12
         head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
         left_ear="Fang Earring", -- Attack +4 Evasion -4
         right_ear="Fang Earring", -- Attack +4 Evasion -4
         neck="Spike Necklace", -- STR +3 DEX +3 MND -6
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
         waist="Life Belt", -- Accuracy +10
         hands="Lgn. Mittens", -- DEF: 3 Attack +3
         left_ring="Fluorite Ring", -- DEX +3  Lightning+7
         right_ring="Fluorite Ring", -- DEX +3  Lightning+7
-        legs="Rogue's Culottes", -- DEF: 32 HP +15 AGI +4 Shield skill +10 "Steal" +1
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
+        legs="Dragon Subligar", -- DEF: 32 DEX +4 "Subtle Blow" +5 Breath damage taken -3% Enmity +2
+        feet="Adsilio Boots +1", -- DEF:14 DEX +5 AGI +5 Accuracy +3 Haste +1%
     }
-    sets.engaged.Acc = {
-        head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
-        waist="Life Belt", -- Accuracy +10
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
-    }
+    sets.engaged.Acc = {}
         
     -- Mod set for trivial mobs (Skadi+1)
     sets.engaged.Mod = {}
@@ -377,28 +393,20 @@ function init_gear_sets()
     sets.engaged.Evasion = {
         left_ear="Dodge Earring", -- Evasion +3
         right_ear="Dodge Earring", -- Evasion +3
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
+        body="Antares Harness", -- DEF: 50 HP +15 DEX +8 AGI +8 Accuracy +8 Evasion +8
+        waist="Scouter's Rope", -- DEF: 6 HP -40 AGI +4 Evasion +10
     }
 
-    sets.engaged.Acc.Evasion = {
-    }
+    sets.engaged.Acc.Evasion = {}
 
     sets.engaged.PDT = {
         head="Rogue's Bonnet", -- DEF: 23 HP +13 INT +5 Parrying skill +10 "Steal" +1
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
-        back="Rep. Army Mantle", -- DEF: 6 HP +6 DEX +2 VIT +2
-    }
-    sets.engaged.Acc.PDT = {
-        head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
-        body="Scorpion Harness", -- DEF: 40 HP +15  Ice-20  Water+15  Dark+15 Accuracy +10 Evasion +10
-        waist="Life Belt", -- Accuracy +10
+        left_ear="Dodge Earring", -- Evasion +3
+        right_ear="Dodge Earring", -- Evasion +3
+        back="Cerberus Mantle", -- DEF: 12 STR +3 Trans Fire+10 Attack +12 Enmity +3
         hands="Rogue's Armlets", -- DEF: 15 HP +10 DEX +3 Ice+10 "Steal" +1
-        left_ring="Fluorite Ring", -- DEX +3  Lightning+7
-        right_ring="Fluorite Ring", -- DEX +3  Lightning+7
-        legs="Rogue's Culottes", -- DEF: 32 HP +15 AGI +4 Shield skill +10 "Steal" +1
-        feet="Tabin Boots", -- DEF: 11 Accuracy +1 Evasion +1
     }
+    sets.engaged.Acc.PDT = {}
 
 end
 

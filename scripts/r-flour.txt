@@ -1,0 +1,2 @@
+input /echo ReverseFlourish:L40:1-5:Converts remaining finishing moves into TP. Requires at least one Finishing Move. 
+input /ja "Reverse Flourish" <me>

@@ -1,0 +1,6 @@
+input /echo SA-S:<tp>: 	Binds target. Chance of binding varies with TP. 
+input /ja "Assassin's Charge" <me>
+wait 1
+input /ja "Sneak Attack" <me>
+wait 1
+input /ws "Shadowstitch" <t>

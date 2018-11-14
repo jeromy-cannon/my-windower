@@ -1,0 +1,2 @@
+input /echo AnimatedFlourish:L20:1-2:Provokes the target. Requires at least one, but uses two Finishing Moves. 
+input /ja "Animated Flourish" <t>

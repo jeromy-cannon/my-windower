@@ -1,0 +1,3 @@
+input /echo StutterStep:L40:100:Applies Weakened Daze. Lowers the targets magic resistance. 
+input /echo If successful, you will earn two Finishing Moves. If Dancer is set as your support job, you will only earn one Finishing Move. 
+input /ja "Stutter Step" <t>

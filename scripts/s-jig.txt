@@ -1,0 +1,2 @@
+input /echo SpectalJig:L25:0:Allows you to evade enemies by making you undetectable by sight and sound. 
+input /ja "Spectral Jig" <me>

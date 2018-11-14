@@ -1,0 +1,2 @@
+input /echo HealingWaltz:L35:200:Removes one detrimental status effect from target party member. 
+input /ja "Healing Waltz" <stpt>

@@ -1,0 +1,2 @@
+input /echo DrainSambaII:L35:250:Inflicts the next target you strike with Drain Daze, allowing all those engaged in battle with it to drain its HP. 
+input /ja "Drain Samba II" <me>

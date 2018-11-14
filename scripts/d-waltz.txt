@@ -1,0 +1,2 @@
+input /echo DivineWaltz:L25:400:Heals party members within area of effect. 
+input /ja "Divine Waltz" <stpt>

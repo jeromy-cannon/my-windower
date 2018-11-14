@@ -1,0 +1,5 @@
+input /equip R.ring "Emperor Band"
+wait 5
+input /item "Emperor Band" <me>
+wait 10
+input /equip R.ring "Warp Ring"
