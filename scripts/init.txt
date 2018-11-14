@@ -13,6 +13,7 @@ console_fadedelay 15000
 console_screendir screenshots
 showfps 1
 fps_position 0 18
+showfps 0
 
 exec expore.txt
 lua load gearswap
