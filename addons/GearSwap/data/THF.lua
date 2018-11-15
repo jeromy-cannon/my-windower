@@ -29,7 +29,7 @@ function job_setup()
     state.Buff['Trick Attack'] = buffactive['trick attack'] or false
     state.Buff['Feint'] = buffactive['feint'] or false
     
-    include('Mote-TreasureHunter')
+    --include('Mote-TreasureHunter')
 
     -- For th_action_check():
     -- JA IDs for actions that always have TH: Provoke, Animated Flourish
@@ -157,9 +157,9 @@ function init_gear_sets()
     }
 
     -- Actions we want to use to tag TH.
-    sets.precast.Step = sets.TreasureHunter
-    sets.precast.Flourish1 = sets.TreasureHunter
-    sets.precast.JA.Provoke = sets.TreasureHunter
+    -- sets.precast.Step = sets.TreasureHunter
+    -- sets.precast.Flourish1 = sets.TreasureHunter
+    -- sets.precast.JA.Provoke = sets.TreasureHunter
 
 
     --------------------------------------
@@ -415,26 +415,26 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 -- Run after the general precast() is done.
-function job_post_precast(spell, action, spellMap, eventArgs)
-    if _settings.debug_mode then add_to_chat(123,'job_post_precast begin') end
-    if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
-        equip(sets.TreasureHunter)
-    elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' or spell.type == 'WeaponSkill' then
-        if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
-            equip(sets.TreasureHunter)
-        end
-    end
-    if _settings.debug_mode then add_to_chat(123,'job_post_precast end') end
-end
+-- function job_post_precast(spell, action, spellMap, eventArgs)
+--     if _settings.debug_mode then add_to_chat(123,'job_post_precast begin') end
+--     if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
+--         equip(sets.TreasureHunter)
+--     elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' or spell.type == 'WeaponSkill' then
+--         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
+--             equip(sets.TreasureHunter)
+--         end
+--     end
+--     if _settings.debug_mode then add_to_chat(123,'job_post_precast end') end
+-- end
 
 -- Run after the general midcast() set is constructed.
-function job_post_midcast(spell, action, spellMap, eventArgs)
-    if _settings.debug_mode then add_to_chat(123,'job_post_midcast begin') end
-    if state.TreasureMode.value ~= 'None' and spell.action_type == 'Ranged Attack' then
-        equip(sets.TreasureHunter)
-    end
-    if _settings.debug_mode then add_to_chat(123,'job_post_midcast end') end
-end
+-- function job_post_midcast(spell, action, spellMap, eventArgs)
+--     if _settings.debug_mode then add_to_chat(123,'job_post_midcast begin') end
+--     if state.TreasureMode.value ~= 'None' and spell.action_type == 'Ranged Attack' then
+--         equip(sets.TreasureHunter)
+--     end
+--     if _settings.debug_mode then add_to_chat(123,'job_post_midcast end') end
+-- end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -520,23 +520,23 @@ function customize_idle_set(idleSet)
 end
 
 
-function customize_melee_set(meleeSet)
-    if _settings.debug_mode then add_to_chat(123,'customize_melee_set begin') end
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
+-- function customize_melee_set(meleeSet)
+--     if _settings.debug_mode then add_to_chat(123,'customize_melee_set begin') end
+--     if state.TreasureMode.value == 'Fulltime' then
+--         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+--     end
 
-    if _settings.debug_mode then add_to_chat(123,'customize_melee_set end') end
-    return meleeSet
-end
+--     if _settings.debug_mode then add_to_chat(123,'customize_melee_set end') end
+--     return meleeSet
+-- end
 
 
 -- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    if _settings.debug_mode then add_to_chat(123,'job_update begin') end
-    th_update(cmdParams, eventArgs)
-    if _settings.debug_mode then add_to_chat(123,'job_update end') end
-end
+-- function job_update(cmdParams, eventArgs)
+--     if _settings.debug_mode then add_to_chat(123,'job_update begin') end
+--     th_update(cmdParams, eventArgs)
+--     if _settings.debug_mode then add_to_chat(123,'job_update end') end
+-- end
 
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
@@ -571,7 +571,7 @@ function display_current_job_state(eventArgs)
         msg = msg .. ', Target NPCs'
     end
     
-    msg = msg .. ', TH: ' .. state.TreasureMode.value
+    -- msg = msg .. ', TH: ' .. state.TreasureMode.value
 
     add_to_chat(122, msg)
 
@@ -587,9 +587,9 @@ function check_buff(buff_name, eventArgs)
     if _settings.debug_mode then add_to_chat(123,'check_buff begin') end
     if state.Buff[buff_name] then
         equip(sets.buff[buff_name] or {})
-        if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
-            equip(sets.TreasureHunter)
-        end
+        -- if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
+        --     equip(sets.TreasureHunter)
+        -- end
         eventArgs.handled = true
     end
     if _settings.debug_mode then add_to_chat(123,'check_buff end') end
@@ -599,17 +599,17 @@ end
 -- Check for various actions that we've specified in user code as being used with TH gear.
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
-function th_action_check(category, param)
-    if _settings.debug_mode then add_to_chat(123,'th_action_check begin') end
-    if category == 2 or -- any ranged attack
-        --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
-        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
-        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-        then return true
-    end
-    if _settings.debug_mode then add_to_chat(123,'th_action_check end') end
-end
+-- function th_action_check(category, param)
+--     if _settings.debug_mode then add_to_chat(123,'th_action_check begin') end
+--     if category == 2 or -- any ranged attack
+--         --category == 4 or -- any magic action
+--         (category == 3 and param == 30) or -- Aeolian Edge
+--         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+--         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+--         then return true
+--     end
+--     if _settings.debug_mode then add_to_chat(123,'th_action_check end') end
+-- end
 
 
 -- Function to lock the ranged slot if we have a ranged weapon equipped.
