@@ -1,15 +1,28 @@
 unload timers
+unload ffxidb
 lua unload debuffed 
 lua unload giltracker
 lua unload linker
 lua unload logger
 lua unload trusts
 lua unload scoreboard
-lua unload gearswap
+lua unload pointwatch
 
 load delaymenot
-load ffxidb
 load infobar
+load timers
 lua load clock
-lua load pointwatch
 lua load tparty
+lua load trusts
+lua load gearswap
+
+list
+lua list
+
+input /hidetrust on
+input /ignoretrust on
+input /localsettings blureffect off
+input /ingorepet on
+input /statustimer on
+input /partyinfo showtp on
+input /statusparty on

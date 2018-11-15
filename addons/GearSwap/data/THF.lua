@@ -225,7 +225,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Bomb Core", -- Fire-6 Attack +12
         head="Zeal Cap", -- DEF: 19 Accuracy +2 Attack +2 Haste +1%
-        back="Cerberus Mantle", -- DEF: 12 STR +3 Trans Fire+10 Attack +12 Enmity +3
+        back="Cerberus Mantle", -- DEF: 12 STR +3 Fire+10 Attack +12 Enmity +3
         left_ear="Fang Earring", -- Attack +4 Evasion -4
         right_ear="Fang Earring", -- Attack +4 Evasion -4
     }
@@ -416,6 +416,7 @@ end
 
 -- Run after the general precast() is done.
 function job_post_precast(spell, action, spellMap, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_post_precast begin') end
     if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
         equip(sets.TreasureHunter)
     elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' or spell.type == 'WeaponSkill' then
@@ -423,30 +424,37 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.TreasureHunter)
         end
     end
+    if _settings.debug_mode then add_to_chat(123,'job_post_precast end') end
 end
 
 -- Run after the general midcast() set is constructed.
 function job_post_midcast(spell, action, spellMap, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_post_midcast begin') end
     if state.TreasureMode.value ~= 'None' and spell.action_type == 'Ranged Attack' then
         equip(sets.TreasureHunter)
     end
+    if _settings.debug_mode then add_to_chat(123,'job_post_midcast end') end
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_aftercast begin') end
     -- Weaponskills wipe SATA/Feint.  Turn those state vars off before default gearing is attempted.
     if spell.type == 'WeaponSkill' and not spell.interrupted then
         state.Buff['Sneak Attack'] = false
         state.Buff['Trick Attack'] = false
         state.Buff['Feint'] = false
     end
+    if _settings.debug_mode then add_to_chat(123,'job_aftercast end') end
 end
 
 -- Called after the default aftercast handling is complete.
 function job_post_aftercast(spell, action, spellMap, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_post_aftercast begin') end
     -- If Feint is active, put that gear set on on top of regular gear.
     -- This includes overlaying SATA gear.
     check_buff('Feint', eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_post_aftercast end') end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -457,11 +465,13 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
+    if _settings.debug_mode then add_to_chat(123,'job_buff_change begin') end
     if state.Buff[buff] ~= nil then
         if not midaction() then
             handle_equipping_gear(player.status)
         end
     end
+    if _settings.debug_mode then add_to_chat(123,'job_buff_change end') end
 end
 
 
@@ -470,6 +480,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function get_custom_wsmode(spell, spellMap, defaut_wsmode)
+    if _settings.debug_mode then add_to_chat(123,'get_custom_wsmode begin') end
     local wsmode
 
     if state.Buff['Sneak Attack'] then
@@ -479,12 +490,14 @@ function get_custom_wsmode(spell, spellMap, defaut_wsmode)
         wsmode = (wsmode or '') .. 'TA'
     end
 
+    if _settings.debug_mode then add_to_chat(123,'get_custom_wsmode end') end
     return wsmode
 end
 
 
 -- Called any time we attempt to handle automatic gear equips (ie: engaged or idle gear).
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_handle_equipping_gear begin') end
     -- Check that ranged slot is locked, if necessary
     check_range_lock()
 
@@ -492,30 +505,37 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     -- that gear specifically, and block equipping default gear.
     check_buff('Sneak Attack', eventArgs)
     check_buff('Trick Attack', eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_handle_equipping_gear end') end
 end
 
 
 function customize_idle_set(idleSet)
+    if _settings.debug_mode then add_to_chat(123,'customize_idle_set begin') end
     if player.hpp < 80 then
         idleSet = set_combine(idleSet, sets.ExtraRegen)
     end
 
+    if _settings.debug_mode then add_to_chat(123,'customize_idle_set end') end
     return idleSet
 end
 
 
 function customize_melee_set(meleeSet)
+    if _settings.debug_mode then add_to_chat(123,'customize_melee_set begin') end
     if state.TreasureMode.value == 'Fulltime' then
         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
     end
 
+    if _settings.debug_mode then add_to_chat(123,'customize_melee_set end') end
     return meleeSet
 end
 
 
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_update begin') end
     th_update(cmdParams, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'job_update end') end
 end
 
 -- Function to display the current relevant user state when doing an update.
@@ -564,6 +584,7 @@ end
 
 -- State buff checks that will equip buff gear and mark the event as handled.
 function check_buff(buff_name, eventArgs)
+    if _settings.debug_mode then add_to_chat(123,'check_buff begin') end
     if state.Buff[buff_name] then
         equip(sets.buff[buff_name] or {})
         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
@@ -571,6 +592,7 @@ function check_buff(buff_name, eventArgs)
         end
         eventArgs.handled = true
     end
+    if _settings.debug_mode then add_to_chat(123,'check_buff end') end
 end
 
 
@@ -578,6 +600,7 @@ end
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
 function th_action_check(category, param)
+    if _settings.debug_mode then add_to_chat(123,'th_action_check begin') end
     if category == 2 or -- any ranged attack
         --category == 4 or -- any magic action
         (category == 3 and param == 30) or -- Aeolian Edge
@@ -585,16 +608,19 @@ function th_action_check(category, param)
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
         then return true
     end
+    if _settings.debug_mode then add_to_chat(123,'th_action_check end') end
 end
 
 
 -- Function to lock the ranged slot if we have a ranged weapon equipped.
 function check_range_lock()
+    if _settings.debug_mode then add_to_chat(123,'check_range_lock begin') end
     if player.equipment.range ~= 'empty' then
         disable('range', 'ammo')
     else
         enable('range', 'ammo')
     end
+    if _settings.debug_mode then add_to_chat(123,'check_range_lock end') end
 end
 
 

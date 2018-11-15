@@ -12,3 +12,6 @@ lua load clock
 lua load giltracker
 lua load linker
 lua load trusts
+
+list
+lua list

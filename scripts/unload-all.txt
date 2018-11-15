@@ -12,3 +12,6 @@ lua unload tparty
 lua unload trusts
 lua unload scoreboard
 lua unload gearswap
+
+lua list
+list

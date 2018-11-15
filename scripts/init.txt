@@ -15,7 +15,7 @@ showfps 1
 fps_position 0 18
 showfps 0
 
-exec expore.txt
+exec explore.txt
 lua load gearswap
 
 bind f12 showfps

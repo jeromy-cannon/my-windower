@@ -1,3 +1,4 @@
+input /servmes
 input /echo ----------- begin --------------------
 input /echo /console exec init.txt
 input /echo ,        = zoom out

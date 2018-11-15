@@ -13,7 +13,13 @@ lua load debuffed
 lua load logger
 lua load pointwatch
 lua load tparty
+lua load trusts
 lua load scoreboard
+lua load gearswap
 sb reset
 sb visible on
 gs showswaps
+gs debugmode
+
+list
+lua list
