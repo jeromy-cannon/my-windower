@@ -34,7 +34,7 @@
         sets.TreasureHunter = {}
         sets.ExtraRegen = {}
         sets.Kiting = {
-            feet="Areion Boots",
+            feet="Areion Boots"
         }
     
         sets.buff['Sneak Attack'] = {}
@@ -55,10 +55,10 @@
         sets.precast.JA['Collaborator'] = {}
         sets.precast.JA['Accomplice'] = {}
         sets.precast.JA['Flee'] = {
-            feet="Rogue's Poulaines",
+            feet="Rogue's Poulaines"
         }
         sets.precast.JA['Hide'] = {
-            body="Rogue's Vest",
+            body="Rogue's Vest"
         }
         sets.precast.JA['Conspirator'] = {}
         sets.precast.JA['Steal'] = {
@@ -66,14 +66,14 @@
             waist="Key Ring Belt",
             hands="Rogue's Armlets",
             legs="Rogue's Culottes",
-            feet="Rogue's Poulaines",
+            feet="Rogue's Poulaines"
         }
         sets.precast.JA['Despoil'] = {
             head="Rogue's Bonnet",
             waist="Key Ring Belt",
             hands="Rogue's Armlets", 
             legs="Rogue's Culottes", 
-            feet="Rogue's Poulaines",
+            feet="Rogue's Poulaines"
         }
         sets.precast.JA['Perfect Dodge'] = {}
         sets.precast.JA['Feint'] = {}
@@ -85,7 +85,7 @@
         -- Waltz set (chr and vit)
         sets.precast.Waltz = {
             body="Savage Separates", 
-            feet="Savage Gaiters", 
+            feet="Savage Gaiters" 
         }
     
         -- Don't need any special gear for Healing Waltz.
@@ -100,7 +100,7 @@
     
         -- Ranged snapshot gear
         sets.precast.RA = {
-            range="Long Boomerang",
+            range="Long Boomerang"
         }
     
     
@@ -193,7 +193,7 @@
             right_ear="Fang Earring",
             left_ring="Enlivened Ring",
             right_ring="Warp Ring",
-            back="Cuchulain's Mantle",
+            back="Cuchulain's Mantle"
         }
     
         -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
@@ -213,7 +213,7 @@
             right_ear="Fang Earring",
             left_ring="Enlivened Ring",
             right_ring="Warp Ring",
-            back="Cuchulain's Mantle",
+            back="Cuchulain's Mantle"
         }
     
         sets.idle.Town = {
@@ -225,7 +225,7 @@
             legs="Savage Loincloth", 
             feet="Areion Boots", 
             left_ring="Echad Ring",
-            right_ring="Warp Ring",
+            right_ring="Warp Ring"
         }
     
         sets.idle.Weak = {}
@@ -260,7 +260,7 @@
             right_ear="Fang Earring",
             left_ring="Enlivened Ring",
             right_ring="Warp Ring",
-            back="Cuchulain's Mantle",
+            back="Cuchulain's Mantle"
         }
         sets.engaged.Acc = {}
             
