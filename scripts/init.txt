@@ -15,8 +15,7 @@ showfps 1
 fps_position 0 18
 showfps 0
 
-exec explore.txt
-lua load gearswap
+exec windower-full.txt
 
 bind f12 showfps
 bind sysrq screenshot jpg hide
@@ -29,6 +28,8 @@ alias aspir exec a-sam.txt
 alias battle-bare exec battle-bare.txt
 alias battle-debug exec battle-debug.txt
 alias blink input /ma "Utsusemi: Ichi" <me>
+alias bully input /ja "Bully" <t>
+alias conspir input /ja "Conspirator" <me>
 alias cura exec d-waltz.txt
 alias cure exec cure-waltz.txt
 alias cure2 exec cure-waltz-2.txt
@@ -36,6 +37,7 @@ alias cure3 exec cure-waltz-3.txt
 alias cyclone input /ws "Cyclone" <t>
 alias defdown exec b-step.txt
 alias dem exec dem.txt
+alias despoil input /ja "Despoil" <t>
 alias dodge input /ja "Perfect Dodge" <me>
 alias drain exec d-sam.txt
 alias drain2 exec d-sam-2.txt
@@ -50,13 +52,16 @@ alias gravity exec d-flour.txt
 alias gust input /ws "Gust Slash" <t>
 alias hide input /ja "Hide" <me>
 alias hsam exec haste-samba.txt
+alias load-gs lua load gearswap
+alias mount input /mount "Spectral chair"
 alias mug input /ja "Mug" <t>
 alias panic exec panic.txt
 alias provoke exec a-flour.txt
 alias pull input /ra <t>
 alias rflour exec r-flour.txt
 alias sa input /ja "Sneak Attack" <me>
-alias sa-vb exec sa-vb.txt
+alias saae exec sa-ae.txt
+alias savb exec sa-vb.txt
 alias sad exec sa-d.txt
 alias sags exec sa-gs.txt
 alias sas exec sa-s.txt 
@@ -67,9 +72,12 @@ alias sjig exec s-jig.txt
 alias sstep exec s-step.txt
 alias steal input /ja "Steal" <t>
 alias ta input /ja "Trick Attack" <me>
+alias taae exec ta-ae.txt
 alias tad exec ta-d.txt
 alias tasb exec ta-sb.txt
 alias undetect exec undetectable.txt
 alias unload-all exec unload-all.txt
+alias unload-gs lua unload gearswap
 alias vb input /ws "Viper Bite" <t>
 alias vflour exec v-flour.txt
+alias warp exec warp.txt

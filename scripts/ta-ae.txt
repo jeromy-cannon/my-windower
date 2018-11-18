@@ -2,4 +2,4 @@ input /ja "Assassin's Charge" <me>
 wait 1
 input /ja "Trick Attack" <me>
 wait 2
-input /ws "Dancing Edge" <t>
+input /ws "Aeolian Edge" <t>

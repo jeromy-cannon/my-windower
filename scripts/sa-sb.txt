@@ -1,4 +1,3 @@
-input /echo SA-SB:<tp>:Delivers a twofold attack. Damage varies with TP. 
 input /ja "Assassin's Charge" <me>
 wait 1
 input /ja "Sneak Attack" <me>
