@@ -10,6 +10,7 @@ lua load gametime
 lua load giltracker
 lua load linker
 lua load logger
+lua load mountmuzzle
 lua load pointwatch
 lua load scoreboard
 lua load speedchecker
