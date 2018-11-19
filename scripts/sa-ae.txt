@@ -1,5 +1,3 @@
-input /ja "Assassin's Charge" <me>
-wait 1
 input /ja "Sneak Attack" <me>
 wait 2
 input /ws "Aeolian Edge" <t>
