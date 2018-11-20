@@ -58,6 +58,7 @@ alias mug input /ja "Mug" <t>
 alias panic exec panic.txt
 alias provoke exec a-flour.txt
 alias pull input /ra <t>
+alias reload-gs unload-gs;load-gs;gs showswaps;gs debugmode
 alias rflour exec r-flour.txt
 alias sa input /ja "Sneak Attack" <me>
 alias saae exec sa-ae.txt
