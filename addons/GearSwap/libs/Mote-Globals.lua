@@ -88,20 +88,25 @@ end
 
 -- Global intercept on precast.
 function user_precast(spell, action, spellMap, eventArgs)
+    debug_end()
     cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
     refine_waltz(spell, action, spellMap, eventArgs)
+    debug_end()
 end
 
 -- Global intercept on midcast.
 function user_midcast(spell, action, spellMap, eventArgs)
+    debug_begin()
 	-- Default base equipment layer of fast recast.
 	if spell.action_type == 'Magic' and sets.midcast and sets.midcast.FastRecast then
 		equip(sets.midcast.FastRecast)
 	end
+    debug_end()
 end
 
 -- Global intercept on buff change.
 function user_buff_change(buff, gain, eventArgs)
+    debug_begin()
 	-- Create a timer when we gain weakness.  Remove it when weakness is gone.
 	if buff:lower() == 'weakness' then
 		if gain then
@@ -110,5 +115,6 @@ function user_buff_change(buff, gain, eventArgs)
 			send_command('timers delete "Weakness"')
 		end
 	end
+    debug_end()
 end
 

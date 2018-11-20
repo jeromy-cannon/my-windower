@@ -7,10 +7,12 @@
 -- Routing function for general known self_commands.  Mappings are at the bottom of the file.
 -- Handles splitting the provided command line up into discrete words, for the other functions to use.
 function self_command(commandArgs)
+    debug_begin()
     local commandArgs = commandArgs
     if type(commandArgs) == 'string' then
         commandArgs = T(commandArgs:split(' '))
         if #commandArgs == 0 then
+            debug_end()
             return
         end
     end
@@ -33,6 +35,7 @@ function self_command(commandArgs)
             selfCommandMaps[handleCmd](commandArgs)
         end
     end
+    debug_end()
 end
 
 
@@ -44,8 +47,10 @@ end
 -- User command format: gs c set [field] [value]
 -- If a boolean [field] is used, but not given a [value], it will be set to true.
 function handle_set(cmdParams)
+    debug_begin()
     if #cmdParams == 0 then
         add_to_chat(123,'Mote-Libs: Set parameter failure: field not specified.')
+        debug_end()
         return
     end
     
@@ -74,14 +79,17 @@ function handle_set(cmdParams)
     end
 
     -- handle string states: CombatForm, CombatWeapon, etc
+    debug_end()
 end
 
 -- Function to reset values to their defaults.
 -- User command format: gs c reset [field]
 -- Or: gs c reset all
 function handle_reset(cmdParams)
+    debug_begin()
     if #cmdParams == 0 then
         if _global.debug_mode then add_to_chat(123,'handle_reset: parameter failure: reset type not specified') end
+        debug_end()
         return
     end
     
@@ -132,14 +140,17 @@ function handle_reset(cmdParams)
     else
         add_to_chat(123,'Mote-Libs: Reset: Unknown field ['..cmdParams[1]..']')
     end
+    debug_end()
 end
 
 
 -- Handle cycling through the options list of a state var.
 -- User command format: gs c cycle [field]
 function handle_cycle(cmdParams)
+    debug_begin()
     if #cmdParams == 0 then
         add_to_chat(123,'Mote-Libs: Cycle parameter failure: field not specified.')
+        debug_end()
         return
     end
     
@@ -164,22 +175,27 @@ function handle_cycle(cmdParams)
     else
         add_to_chat(123,'Mote-Libs: Cycle: Unknown field ['..cmdParams[1]..']')
     end
+    debug_end()
 end
 
 
 -- Handle cycling backwards through the options list of a state var.
 -- User command format: gs c cycleback [field]
 function handle_cycleback(cmdParams)
+    debug_begin()
     cmdParams[2] = 'reverse'
     handle_cycle(cmdParams)
+    debug_end()
 end
 
 
 -- Handle toggling of boolean mode vars.
 -- User command format: gs c toggle [field]
 function handle_toggle(cmdParams)
+    debug_begin()
     if #cmdParams == 0 then
         add_to_chat(123,'Mote-Libs: Toggle parameter failure: field not specified.')
+        debug_end()
         return
     end
     
@@ -200,14 +216,17 @@ function handle_toggle(cmdParams)
     else
         add_to_chat(123,'Mote-Libs: Toggle: Unknown field ['..cmdParams[1]..']')
     end
+    debug_end()
 end
 
 
 -- Function to force a boolean field to false.
 -- User command format: gs c unset [field]
 function handle_unset(cmdParams)
+    debug_begin()
     if #cmdParams == 0 then
         add_to_chat(123,'Mote-Libs: Unset parameter failure: field not specified.')
+        debug_end()
         return
     end
     
@@ -228,6 +247,7 @@ function handle_unset(cmdParams)
     else
         add_to_chat(123,'Mote-Libs: Toggle: Unknown field ['..cmdParams[1]..']')
     end
+    debug_end()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -236,6 +256,7 @@ end
 -- Where [option] can be 'user' to display current state.
 -- Otherwise, generally refreshes current gear used.
 function handle_update(cmdParams)
+    debug_begin()
     -- init a new eventArgs
     local eventArgs = {handled = false}
 
@@ -255,11 +276,13 @@ function handle_update(cmdParams)
     if cmdParams[1] == 'user' then
         display_current_state()
     end
+    debug_end()
 end
 
 
 -- showtp: equip the current TP set for examination.
 function handle_showtp(cmdParams)
+    debug_begin()
     local msg = 'Showing current TP set: ['.. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
         msg = msg .. '/' .. state.HybridMode.value
@@ -279,6 +302,7 @@ function handle_showtp(cmdParams)
 
     add_to_chat(122, msg)
     equip(get_melee_set())
+    debug_end()
 end
 
 
@@ -286,8 +310,10 @@ end
 -- all slots are enabled before removing gear.
 -- Command: "gs c naked"
 function handle_naked(cmdParams)
+    debug_begin()
     enable('main','sub','range','ammo','head','neck','lear','rear','body','hands','lring','rring','back','waist','legs','feet')
     equip(sets.naked)
+    debug_end()
 end
 
 
@@ -296,21 +322,26 @@ end
 -- Get the state var that matches the requested name.
 -- Only returns mode vars.
 function get_state(name)
+    debug_begin()
     if state[name] then
+        debug_end()
         return state[name]._class == 'mode' and state[name] or nil
     else
         local l_name = name:lower()
         for key,var in pairs(state) do
             if key:lower() == l_name then
+                debug_end()
                 return var._class == 'mode' and var or nil
             end
         end
     end
+    debug_end()
 end
 
 
 -- Function to reset state.Buff values (called from update).
 function reset_buff_states()
+    debug_begin()
     if state.Buff then
         for buff,present in pairs(state.Buff) do
             if mote_vars.res_buffs:contains(buff) then
@@ -318,12 +349,14 @@ function reset_buff_states()
             end
         end
     end
+    debug_end()
 end
 
 
 -- Function to display the current relevant user state when doing an update.
 -- Uses display_current_job_state instead if that is defined in the job lua.
 function display_current_state()
+    debug_begin()
     local eventArgs = {handled = false}
     if display_current_job_state then
         display_current_job_state(eventArgs)
@@ -366,10 +399,12 @@ function display_current_state()
     if state.EquipStop.value ~= 'off' then
         add_to_chat(122,'Gear equips are blocked after ['..state.EquipStop.value..'].  Use "//gs c reset equipstop" to turn it off.')
     end
+    debug_end()
 end
 
 -- Generic version of this for casters
 function display_current_caster_state()
+    debug_begin()
     local msg = ''
     
     if state.OffenseMode.value ~= 'None' then
@@ -401,6 +436,7 @@ function display_current_caster_state()
     end
 
     add_to_chat(122, msg)
+    debug_end()
 end
 
 
@@ -410,6 +446,7 @@ end
 -- Syntax: gs c help
 -- Or: gs c
 function handle_help(cmdParams)
+    debug_begin()
     if cmdParams[1] and cmdParams[1]:lower():startswith('field') then
         print('Predefined Library Fields:')
         print('--------------------------')
@@ -434,16 +471,19 @@ function handle_help(cmdParams)
         print('Show TP Set:      gs c showtp')
         print('State vars:       gs c help field')
     end
+    debug_end()
 end
 
 
 -- A function for testing lua code.  Called via "gs c test".
 function handle_test(cmdParams)
+    debug_begin()
     if user_test then
         user_test(cmdParams)
     elseif job_test then
         job_test(cmdParams)
     end
+    debug_end()
 end
 
 

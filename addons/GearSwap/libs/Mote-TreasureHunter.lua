@@ -70,6 +70,7 @@ sets.TreasureHunter = {}
 -- Can call to force a status refresh.
 -- Also displays the current tagged mob table if in debug mode.
 function th_update(cmdParams, eventArgs)
+    debug_begin()
     if (cmdParams and cmdParams[1] == 'user') or not cmdParams then
         TH_for_first_hit()
     
@@ -77,6 +78,7 @@ function th_update(cmdParams, eventArgs)
             print_set(info.tagged_mobs, 'Tagged mobs')
         end
     end
+    debug_end()
 end
 
 
@@ -86,17 +88,20 @@ end
 
 -- Set locked TH flag to true, and disable relevant gear slots.
 function lock_TH()
+    debug_begin()
     state.th_gear_is_locked = true
     local slots = T{}
     for slot,item in pairs(sets.TreasureHunter) do
         slots:append(slot)
     end
     disable(slots)
+    debug_end()
 end
 
 
 -- Set locked TH flag to false, and enable relevant gear slots.
 function unlock_TH()
+    debug_begin()
     state.th_gear_is_locked = false
     local slots = T{}
     for slot,item in pairs(sets.TreasureHunter) do
@@ -104,11 +109,13 @@ function unlock_TH()
     end
     enable(slots)
     send_command('gs c update auto')
+    debug_end()
 end
 
 
 -- For any active TH mode, if we haven't already tagged this target, equip TH gear and lock slots until we manage to hit it.
 function TH_for_first_hit()
+    debug_begin()
     if player.status == 'Engaged' and state.TreasureMode.value ~= 'None' then
         if not info.tagged_mobs[player.target.id] then
             if _settings.debug_mode then add_to_chat(123,'Prepping for first hit on '..tostring(player.target.id)..'.') end
@@ -123,6 +130,7 @@ function TH_for_first_hit()
     else
         unlock_TH()
     end
+    debug_end()
 end
 
 
@@ -132,6 +140,7 @@ end
 
 -- On engaging a mob, attempt to add TH gear.  For any other status change, unlock TH gear slots.
 function on_status_change_for_th(new_status_id, old_status_id)
+    debug_begin()
     if gearswap.gearswap_disabled or T{2,3,4}:contains(old_status_id) or T{2,3,4}:contains(new_status_id) then return end
     
     local new_status = gearswap.res.statuses[new_status_id].english
@@ -146,11 +155,13 @@ function on_status_change_for_th(new_status_id, old_status_id)
         info.last_player_target_index = 0
         unlock_TH()
     end
+    debug_end()
 end
 
 
 -- On changing targets, attempt to add TH gear.
 function on_target_change_for_th(new_index, old_index)
+    debug_begin()
     -- Only care about changing targets while we're engaged, either manually or via current target death.
     if player.status == 'Engaged' then
         -- If  the current player.target is the same as the new mob then we're actually
@@ -162,11 +173,13 @@ function on_target_change_for_th(new_index, old_index)
             TH_for_first_hit()
         end
     end
+    debug_end()
 end
 
 
 -- On any action event, mark mobs that we tag with TH.  Also, update the last time tagged mobs were acted on.
 function on_action_for_th(action)
+    debug_begin()
     --add_to_chat(123,'cat='..action.category..',param='..action.param)
     -- If player takes action, adjust TH tagging information
     if state.TreasureMode.value ~= 'None' then
@@ -202,6 +215,7 @@ function on_action_for_th(action)
     end
     
     cleanup_tagged_mobs()
+    debug_end()
 end
 
 
@@ -210,6 +224,7 @@ end
 --
 -- This function removes mobs from our tracking table when they die.
 function on_incoming_chunk_for_th(id, data, modified, injected, blocked)
+    --debug_begin()
     if id == 0x29 then
         local target_id = data:unpack('I',0x09)
         local message_id = data:unpack('H',0x19)%32768
@@ -224,13 +239,16 @@ function on_incoming_chunk_for_th(id, data, modified, injected, blocked)
             end
         end
     end
+    --debug_end()
 end
 
 
 -- Clear out the entire tagged mobs table when zoning.
 function on_zone_change_for_th(new_zone, old_zone)
+    debug_begin()
     if _settings.debug_mode then add_to_chat(123,'Zoning. Clearing tagged mobs table.') end
     info.tagged_mobs:clear()
+    debug_end()
 end
 
 
@@ -242,6 +260,7 @@ end
 
 -- Called if we change any user state fields.
 function job_state_change(stateField, newValue, oldValue)
+    debug_begin()
     if stateField == 'Treasure Mode' then
         if newValue == 'None' and state.th_gear_is_locked then
             if _settings.debug_mode then add_to_chat(123,'TH Mode set to None. Unlocking gear.') end
@@ -254,6 +273,7 @@ function job_state_change(stateField, newValue, oldValue)
     if job_state_change_via_th then
         job_state_change_via_th(stateField, newValue, oldValue)
     end
+    debug_end()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -264,6 +284,7 @@ end
 -- for over 3 minutes.  This is to handle deagros, player deaths, or other random stuff where the
 -- mob is lost, but doesn't die.
 function cleanup_tagged_mobs()
+    debug_begin()
     -- If it's been more than 3 minutes since an action on or by a tagged mob,
     -- remove them from the tagged mobs list.
     local current_time = os.time()
@@ -280,6 +301,7 @@ function cleanup_tagged_mobs()
     for mob_id,_ in pairs(remove_mobs) do
         info.tagged_mobs[mob_id] = nil
     end
+    debug_end()
 end
 
 

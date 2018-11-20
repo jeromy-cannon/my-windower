@@ -13,12 +13,14 @@ local cancel_types_to_check = S{'Waltz', 'Samba'}
 -- Function to cancel buffs if they'd conflict with using the spell you're attempting.
 -- Requirement: Must have Cancel addon installed and loaded for this to work.
 function cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
+    debug_begin()
     if cancel_spells_to_check:contains(spell.english) or cancel_types_to_check:contains(spell.type) then
         if spell.action_type == 'Ability' then
             local abil_recasts = windower.ffxi.get_ability_recasts()
             if abil_recasts[spell.recast_id] > 0 then
                 add_to_chat(123,'Abort: Ability waiting on recast.')
                 eventArgs.cancel = true
+                debug_end()
                 return
             end
         elseif spell.action_type == 'Magic' then
@@ -26,6 +28,7 @@ function cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
             if spell_recasts[spell.recast_id] > 0 then
                 add_to_chat(123,'Abort: Spell waiting on recast.')
                 eventArgs.cancel = true
+                debug_end()
                 return
             end
         end
@@ -49,6 +52,7 @@ function cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
             send_command('cancel fan dance')
         end
     end
+    debug_end()
 end
 
 
@@ -57,6 +61,7 @@ local special_aftermath_mythics = S{'Tizona', 'Kenkonken', 'Murgleis', 'Yagrush'
 
 -- Call from job_precast() to setup aftermath information for custom timers.
 function custom_aftermath_timers_precast(spell)
+    debug_begin()
     if spell.type == 'WeaponSkill' then
         info.aftermath = {}
         
@@ -65,6 +70,7 @@ function custom_aftermath_timers_precast(spell)
         local empy_ws = data.weaponskills.empyrean[player.equipment.main] or data.weaponskills.empyrean[player.equipment.range]
         
         if not relic_ws and not mythic_ws and not empy_ws then
+            debug_end()
             return
         end
 
@@ -84,10 +90,12 @@ function custom_aftermath_timers_precast(spell)
         elseif spell.english == empy_ws then
             -- nothing can overwrite lvl 3
             if buffactive['Aftermath: Lv.3'] then
+                debug_end()
                 return
             end
             -- only lvl 3 can overwrite lvl 2
             if info.aftermath.level ~= 3 and buffactive['Aftermath: Lv.2'] then
+                debug_end()
                 return
             end
             
@@ -96,10 +104,12 @@ function custom_aftermath_timers_precast(spell)
         elseif spell.english == mythic_ws then
             -- nothing can overwrite lvl 3
             if buffactive['Aftermath: Lv.3'] then
+                debug_end()
                 return
             end
             -- only lvl 3 can overwrite lvl 2
             if info.aftermath.level ~= 3 and buffactive['Aftermath: Lv.2'] then
+                debug_end()
                 return
             end
 
@@ -114,11 +124,13 @@ function custom_aftermath_timers_precast(spell)
             end
         end
     end
+    debug_end()
 end
 
 
 -- Call from job_aftercast() to create the custom aftermath timer.
 function custom_aftermath_timers_aftercast(spell)
+    debug_begin()
     if not spell.interrupted and spell.type == 'WeaponSkill' and
        info.aftermath and info.aftermath.weaponskill == spell.english and info.aftermath.duration > 0 then
 
@@ -130,6 +142,7 @@ function custom_aftermath_timers_aftercast(spell)
 
         info.aftermath = {}
     end
+    debug_end()
 end
 
 
@@ -142,12 +155,15 @@ local waltz_tp_cost = {['Curing Waltz'] = 200, ['Curing Waltz II'] = 350, ['Curi
 -- Utility function for automatically adjusting the waltz spell being used to match HP needs and TP limits.
 -- Handle spell changes before attempting any precast stuff.
 function refine_waltz(spell, action, spellMap, eventArgs)
+    debug_begin()
     if spell.type ~= 'Waltz' then
+        debug_end()
         return
     end
     
     -- Don't modify anything for Healing Waltz or Divine Waltzes
     if spell.english == "Healing Waltz" or spell.english == "Divine Waltz" or spell.english == "Divine Waltz II" then
+        debug_end()
         return
     end
 
@@ -174,6 +190,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
                 -- Don't block when curing others to allow for waking them up.
                 add_to_chat(122,'Full HP!')
                 eventArgs.cancel = true
+                debug_end()
                 return
             elseif missingHP < 200 then
                 newWaltz = 'Curing Waltz'
@@ -197,6 +214,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
                 -- Don't block when curing others to allow for waking them up.
                 add_to_chat(122,'Full HP!')
                 eventArgs.cancel = true
+                debug_end()
                 return
             elseif missingHP < 150 then
                 newWaltz = 'Curing Waltz'
@@ -210,6 +228,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
             end
         else
             -- Not dnc main or sub; bail out
+            debug_end()
             return
         end
     end
@@ -233,6 +252,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
         if player.tp < 200 then
             add_to_chat(122, 'Insufficient TP ['..tostring(player.tp)..']. Cancelling.')
             eventArgs.cancel = true
+            debug_end()
             return
         elseif player.tp < 350 then
             newWaltz = 'Curing Waltz'
@@ -254,24 +274,29 @@ function refine_waltz(spell, action, spellMap, eventArgs)
             add_to_chat(122, downgrade)
         end
         eventArgs.cancel = true
+        debug_end()
         return
     end
 
     if missingHP and missingHP > 0 then
         add_to_chat(122,'Trying to cure '..tostring(missingHP)..' HP using '..newWaltz..'.')
     end
+    debug_end()
 end
 
 
 -- Function to allow for automatic adjustment of the spell target type based on preferences.
 function auto_change_target(spell, spellMap)
+    debug_begin()
     -- Don't adjust targetting for explicitly named targets
     if not spell.target.raw:startswith('<') then
+        debug_end()
         return
     end
 
     -- Do not modify target for spells where we get <lastst> or <me>.
     if spell.target.raw == ('<lastst>') or spell.target.raw == ('<me>') then
+        debug_end()
         return
     end
     
@@ -287,6 +312,7 @@ function auto_change_target(spell, spellMap)
     
     -- If the job handled it, we're done.
     if eventArgs.handled then
+        debug_end()
         return
     end
     
@@ -335,6 +361,7 @@ function auto_change_target(spell, spellMap)
     if newTarget and newTarget ~= spell.target.raw then
         change_target(newTarget)
     end
+    debug_end()
 end
 
 
@@ -344,6 +371,8 @@ end
 
 -- Function to get the current weather intensity: 0 for none, 1 for single weather, 2 for double weather.
 function get_weather_intensity()
+    debug_begin()
+    debug_end()
     return gearswap.res.weather[world.weather_id].intensity
 end
 
@@ -351,18 +380,22 @@ end
 -- Returns true if you're in a party solely comprised of Trust NPCs.
 -- TODO: Do we need a check to see if we're in a party partly comprised of Trust NPCs?
 function is_trust_party()
+    debug_begin()
     -- Check if we're solo
     if party.count == 1 then
+        debug_end()
         return false
     end
     
     -- Can call a max of 3 Trust NPCs, so parties larger than that are out.
     if party.count > 4 then
+        debug_end()
         return false
     end
 
     -- If we're in an alliance, can't be a Trust party.
     if alliance[2].count > 0 or alliance[3].count > 0 then
+        debug_end()
         return false
     end
     
@@ -372,15 +405,18 @@ function is_trust_party()
     for i = 2,4 do
         if party[i] then
             if not npcs.Trust:contains(party[i].name) then
+                debug_end()
                 return false
             end
             if party[i].mob and party[i].mob.is_npc == false then
+                debug_end()
                 return false
             end
         end
     end
     
     -- If it didn't fail any of the above checks, return true.
+    debug_end()
     return true
 end
 
@@ -389,6 +425,7 @@ end
 -- Returns true if any of the specified slots are currently encumbered.
 -- Returns false if all specified slots are unencumbered.
 function is_encumbered(...)
+    debug_begin()
     local check_list = {...}
     -- Compensate for people passing a table instead of a series of strings.
     if type(check_list[1]) == 'table' then
@@ -399,11 +436,13 @@ function is_encumbered(...)
     for slot_id,slot_name in pairs(gearswap.default_slot_map) do
         if check_set:contains(slot_name) then
             if gearswap.encumbrance_table[slot_id] then
+                debug_end()
                 return true
             end
         end
     end
     
+    debug_end()
     return false
 end
 
@@ -413,15 +452,19 @@ end
 
 -- General handler function to set all the elemental gear for an action.
 function set_elemental_gear(spell)
+    debug_begin()
     set_elemental_gorget_belt(spell)
     set_elemental_obi_cape_ring(spell)
     set_elemental_staff(spell)
+    debug_end()
 end
 
 
 -- Set the name field of the predefined gear vars for gorgets and belts, for the specified weaponskill.
 function set_elemental_gorget_belt(spell)
+    debug_begin()
     if spell.type ~= 'WeaponSkill' then
+        debug_end()
         return
     end
 
@@ -433,12 +476,15 @@ function set_elemental_gorget_belt(spell)
     
     gear.ElementalGorget.name = get_elemental_item_name("gorget", weaponskill_elements) or gear.default.weaponskill_neck  or ""
     gear.ElementalBelt.name   = get_elemental_item_name("belt", weaponskill_elements)   or gear.default.weaponskill_waist or ""
+    debug_end()
 end
 
 
 -- Function to get an appropriate obi/cape/ring for the current action.
 function set_elemental_obi_cape_ring(spell)
+    debug_begin()
     if spell.element == 'None' then
+        debug_end()
         return
     end
     
@@ -462,17 +508,21 @@ function set_elemental_obi_cape_ring(spell)
         gear.ElementalCape.name = gear.default.obi_back
         gear.ElementalRing.name = gear.default.obi_ring
     end
+    debug_end()
 end
 
 
 -- Function to get the appropriate fast cast and/or recast staves for the current spell.
 function set_elemental_staff(spell)
+    debug_begin()
     if spell.action_type ~= 'Magic' then
+        debug_end()
         return
     end
 
     gear.FastcastStaff.name = get_elemental_item_name("fastcast_staff", S{spell.element}) or gear.default.fastcast_staff  or ""
     gear.RecastStaff.name   = get_elemental_item_name("recast_staff", S{spell.element})   or gear.default.recast_staff    or ""
+    debug_end()
 end
 
 
@@ -493,14 +543,17 @@ end
 -- or the gear isn't in the player inventory), or the name of the piece of
 -- gear that matches the query.
 function get_elemental_item_name(item_type, valid_elements, restricted_to_elements)
+    debug_begin()
     local potential_elements = restricted_to_elements or elements.list
     local item_map = elements[item_type:lower()..'_of']
     
     for element in (potential_elements.it or it)(potential_elements) do
         if valid_elements:contains(element) and (player.inventory[item_map[element]] or player.wardrobe[item_map[element]] or player.wardrobe2[item_map[element]]) then
+            debug_end()
             return item_map[element]
         end
     end
+    debug_end()
 end
 
 
@@ -509,28 +562,34 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function set_macro_page(set,book)
+    debug_begin()
     if not tonumber(set) then
         add_to_chat(123,'Error setting macro page: Set is not a valid number ('..tostring(set)..').')
+        debug_end()
         return
     end
     if set < 1 or set > 10 then
         add_to_chat(123,'Error setting macro page: Macro set ('..tostring(set)..') must be between 1 and 10.')
+        debug_end()
         return
     end
 
     if book then
         if not tonumber(book) then
             add_to_chat(123,'Error setting macro page: book is not a valid number ('..tostring(book)..').')
+            debug_end()
             return
         end
         if book < 1 or book > 20 then
             add_to_chat(123,'Error setting macro page: Macro book ('..tostring(book)..') must be between 1 and 20.')
+            debug_end()
             return
         end
         send_command('@input /macro book '..tostring(book)..';wait .1;input /macro set '..tostring(set))
     else
         send_command('@input /macro set '..tostring(set))
     end
+    debug_end()
 end
 
 
@@ -541,18 +600,25 @@ end
 -- Attempt to load user gear files in place of default gear sets.
 -- Return true if one exists and was loaded.
 function load_sidecar(job)
-    if not job then return false end
+    debug_begin()
+    if not job then 
+        debug_end()
+        return false 
+    end
     
     -- filename format example for user-local files: whm_gear.lua, or playername_whm_gear.lua
     local filenames = {player.name..'_'..job..'_gear.lua', job..'_gear.lua',
         'gear/'..player.name..'_'..job..'_gear.lua', 'gear/'..job..'_gear.lua',
         'gear/'..player.name..'_'..job..'.lua', 'gear/'..job..'.lua'}
-    return optional_include(filenames)
+     debug_end()
+     return optional_include(filenames)
 end
 
 -- Attempt to include user-globals.  Return true if it exists and was loaded.
 function load_user_globals()
+    debug_begin()
     local filenames = {player.name..'-globals.lua', 'user-globals.lua'}
+    debug_end()
     return optional_include(filenames)
 end
 
@@ -561,13 +627,16 @@ end
 -- filenames takes an array of possible file names to include and checks
 -- each one.
 function optional_include(filenames)
+    debug_begin()
     for _,v in pairs(filenames) do
         local path = gearswap.pathsearch({v})
         if path then
             include(v)
+            debug_end()
             return true
         end
     end
+    debug_end()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -576,19 +645,24 @@ end
 
 -- Attempt to locate a specified name within the current alliance.
 function find_player_in_alliance(name)
+    debug_begin()
     for party_index,ally_party in ipairs(alliance) do
         for player_index,_player in ipairs(ally_party) do
             if _player.name == name then
+                debug_end()
                 return _player
             end
         end
     end
+    debug_end()
 end
 
 
 -- buff_set is a set of buffs in a library table (any of S{}, T{} or L{}).
 -- This function checks if any of those buffs are present on the player.
 function has_any_buff_of(buff_set)
+    debug_begin()
+    debug_end()
     return buff_set:any(
         -- Returns true if any buff from buff set that is sent to this function returns true:
         function (b) return buffactive[b] end
@@ -599,12 +673,14 @@ end
 -- Invert a table such that the keys are values and the values are keys.
 -- Use this to look up the index value of a given entry.
 function invert_table(t)
+    debug_begin()
     if t == nil then error('Attempting to invert table, received nil.', 2) end
     
     local i={}
     for k,v in pairs(t) do 
         i[v] = k
     end
+    debug_end()
     return i
 end
 
@@ -612,6 +688,7 @@ end
 -- Gets sub-tables based on baseSet from the string str that may be in dot form
 -- (eg: baseSet=sets, str='precast.FC', this returns the table sets.precast.FC).
 function get_expanded_set(baseSet, str)
+    debug_begin()
     local cur = baseSet
     for i in str:gmatch("[^.]+") do
         if cur then
@@ -619,6 +696,7 @@ function get_expanded_set(baseSet, str)
         end
     end
     
+    debug_end()
     return cur
 end
 
@@ -636,6 +714,7 @@ end
 -- Variables it sets: classes.Daytime, and classes.DuskToDawn.  They are set to true
 -- if their respective descriptors are true, or false otherwise.
 function time_change(new_time, old_time)
+    debug_begin()
     local was_daytime = classes.Daytime
     local was_dusktime = classes.DuskToDawn
     
@@ -658,6 +737,7 @@ function time_change(new_time, old_time)
 
         handle_update({'auto'})
     end
+    debug_end()
 end
 
 

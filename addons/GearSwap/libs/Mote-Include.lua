@@ -27,6 +27,30 @@
 
 current_mote_include_version = 2
 
+function debug_begin()
+    if not _settings.debug_mode then
+        return
+    end
+    local myLoc = debug.getinfo(2, 'S')
+    local myLoc2 = debug.getinfo(2, 'n')
+    if not myLoc2.name then
+        myLoc2.name = 'undefined'
+    end
+    add_to_chat(10, myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...')
+end
+
+function debug_end()
+    if not _settings.debug_mode then
+        return
+    end
+    local myLoc = debug.getinfo(2, 'S')
+    local myLoc2 = debug.getinfo(2, 'n')
+    if not myLoc2.name then
+        myLoc2.name = 'undefined'
+    end
+    add_to_chat(10, myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
+end
+
 function init_include()
     -- Used to define various types of data mappings.  These may be used in the initialization, so load it up front.
     include('Mote-Mappings')
@@ -225,6 +249,7 @@ end
 -- spell - standard spell table passed in by GearSwap
 -- action - string defining the function mapping to use (precast, midcast, etc)
 function handle_actions(spell, action)
+    debug_begin()
     -- Init an eventArgs that allows cancelling.
     local eventArgs = {handled = false, cancel = false}
     
@@ -280,6 +305,7 @@ function handle_actions(spell, action)
     if _G['cleanup_'..action] then
         _G['cleanup_'..action](spell, spellMap, eventArgs)
     end
+    debug_end()
 end
 
 
@@ -288,33 +314,45 @@ end
 --------------------------------------
 
 function pretarget(spell)
+    debug_begin()
     handle_actions(spell, 'pretarget')
+    debug_end()
 end
 
 function precast(spell)
+    debug_begin()
     if state.Buff[spell.english] ~= nil then
         state.Buff[spell.english] = true
     end
     handle_actions(spell, 'precast')
+    debug_end()
 end
 
 function midcast(spell)
+    debug_begin()
     handle_actions(spell, 'midcast')
+    debug_end()
 end
 
 function aftercast(spell)
+    debug_begin()
     if state.Buff[spell.english] ~= nil then
         state.Buff[spell.english] = not spell.interrupted or buffactive[spell.english] or false
     end
     handle_actions(spell, 'aftercast')
+    debug_end()
 end
 
 function pet_midcast(spell)
+    debug_begin()
     handle_actions(spell, 'pet_midcast')
+    debug_end()
 end
 
 function pet_aftercast(spell)
+    debug_begin()
     handle_actions(spell, 'pet_aftercast')
+    debug_end()
 end
 
 --------------------------------------
@@ -322,29 +360,41 @@ end
 --------------------------------------
 
 function default_pretarget(spell, spellMap)
+    debug_begin()
     auto_change_target(spell, spellMap)
+    debug_end()
 end
 
 function default_precast(spell, spellMap)
+    debug_begin()
     equip(get_precast_set(spell, spellMap))
+    debug_end()
 end
 
 function default_midcast(spell, spellMap)
+    debug_begin()
     equip(get_midcast_set(spell, spellMap))
+    debug_end()
 end
 
 function default_aftercast(spell, spellMap)
+    debug_begin()
     if not pet_midaction() then
         handle_equipping_gear(player.status)
     end
+    debug_end()
 end
 
 function default_pet_midcast(spell, spellMap)
+    debug_begin()
     equip(get_pet_midcast_set(spell, spellMap))
+    debug_end()
 end
 
 function default_pet_aftercast(spell, spellMap)
+    debug_begin()
     handle_equipping_gear(player.status)
+    debug_end()
 end
 
 --------------------------------------
@@ -354,32 +404,40 @@ end
 --------------------------------------
 
 function filter_midcast(spell, spellMap, eventArgs)
+    debug_begin()
     if state.EquipStop.value == 'precast' then
         eventArgs.cancel = true
     end
+    debug_end()
 end
 
 function filter_aftercast(spell, spellMap, eventArgs)
+    debug_begin()
     if state.EquipStop.value == 'precast' or state.EquipStop.value == 'midcast' or state.EquipStop.value == 'pet_midcast' then
         eventArgs.cancel = true
     elseif spell.name == 'Unknown Interrupt' then
         eventArgs.cancel = true
     end
+    debug_end()
 end
 
 function filter_pet_midcast(spell, spellMap, eventArgs)
+    debug_begin()
     -- If we have show_set active for precast or midcast, don't try to equip pet midcast gear.
     if state.EquipStop.value == 'precast' or state.EquipStop.value == 'midcast' then
         add_to_chat(104, 'Show Sets: Pet midcast not equipped.')
         eventArgs.cancel = true
     end
+    debug_end()
 end
 
 function filter_pet_aftercast(spell, spellMap, eventArgs)
+    debug_begin()
     -- If show_set is flagged for precast or midcast, don't try to equip aftercast gear.
     if state.EquipStop.value == 'precast' or state.EquipStop.value == 'midcast' or state.EquipStop.value == 'pet_midcast' then
         eventArgs.cancel = true
     end
+    debug_end()
 end
 
 --------------------------------------
@@ -387,44 +445,56 @@ end
 --------------------------------------
 
 function cleanup_precast(spell, spellMap, eventArgs)
+    debug_begin()
     -- If show_set is flagged for precast, notify that we won't try to equip later gear.
     if state.EquipStop.value == 'precast' then
         add_to_chat(104, 'Show Sets: Stopping at precast.')
     end
+    debug_end()
 end
 
 function cleanup_midcast(spell, spellMap, eventArgs)
+    debug_begin()
     -- If show_set is flagged for midcast, notify that we won't try to equip later gear.
     if state.EquipStop.value == 'midcast' then
         add_to_chat(104, 'Show Sets: Stopping at midcast.')
     end
+    debug_end()
 end
 
 function cleanup_aftercast(spell, spellMap, eventArgs)
+    debug_begin()
     -- Reset custom classes after all possible precast/midcast/aftercast/job-specific usage of the value.
     -- If we're in the middle of a pet action, pet_aftercast will handle clearing it.
     if not pet_midaction() then
         reset_transitory_classes()
     end
+    debug_end()
 end
 
 function cleanup_pet_midcast(spell, spellMap, eventArgs)
+    debug_begin()
     -- If show_set is flagged for pet midcast, notify that we won't try to equip later gear.
     if state.EquipStop.value == 'pet_midcast' then
         add_to_chat(104, 'Show Sets: Stopping at pet midcast.')
     end
+    debug_end()
 end
 
 function cleanup_pet_aftercast(spell, spellMap, eventArgs)
+    debug_begin()
     -- Reset custom classes after all possible precast/midcast/aftercast/job-specific usage of the value.
     reset_transitory_classes()
+    debug_end()
 end
 
 
 -- Clears the values from classes that only exist til the action is complete.
 function reset_transitory_classes()
+    debug_begin()
     classes.CustomClass = nil
     classes.JAMode = nil
+    debug_end()
 end
 
 
@@ -436,6 +506,7 @@ end
 -- Central point to call to equip gear based on status.
 -- Status - Player status that we're using to define what gear to equip.
 function handle_equipping_gear(playerStatus, petStatus)
+    debug_begin()
     -- init a new eventArgs
     local eventArgs = {handled = false}
 
@@ -448,12 +519,14 @@ function handle_equipping_gear(playerStatus, petStatus)
     if not eventArgs.handled then
         equip_gear_by_status(playerStatus, petStatus)
     end
+    debug_end()
 end
 
 
 -- Function to wrap logic for equipping gear on aftercast, status change, or user update.
 -- @param status : The current or new player status that determines what sort of gear to equip.
 function equip_gear_by_status(playerStatus, petStatus)
+    debug_begin()
     if _global.debug_mode then add_to_chat(123,'Debug: Equip gear for status ['..tostring(status)..'], HP='..tostring(player.hp)) end
 
     playerStatus = playerStatus or player.status or 'Idle'
@@ -467,6 +540,7 @@ function equip_gear_by_status(playerStatus, petStatus)
     elseif playerStatus == 'Resting' then
         equip(get_resting_set(petStatus))
     end
+    debug_end()
 end
 
 
@@ -481,9 +555,11 @@ end
 -- Params:
 -- petStatus - Optional explicit definition of pet status.
 function get_idle_set(petStatus)
+    debug_begin()
     local idleSet = sets.idle
     
     if not idleSet then
+        debug_end()
         return {}
     end
     
@@ -539,6 +615,7 @@ function get_idle_set(petStatus)
         idleSet = customize_idle_set(idleSet)
     end
 
+    debug_end()
     return idleSet
 end
 
@@ -547,9 +624,11 @@ end
 -- Set construction order (all sets after sets.engaged are optional):
 --   sets.engaged[state.CombatForm][state.CombatWeapon][state.OffenseMode][state.DefenseMode][classes.CustomMeleeGroups (any number)]
 function get_melee_set()
+    debug_begin()
     local meleeSet = sets.engaged
     
     if not meleeSet then
+        debug_end()
         return {}
     end
     
@@ -594,6 +673,7 @@ function get_melee_set()
         meleeSet = user_customize_melee_set(meleeSet)
     end
 
+    debug_end()
     return meleeSet
 end
 
@@ -602,9 +682,11 @@ end
 -- Set construction order:
 --   sets.resting[state.RestingMode]
 function get_resting_set()
+    debug_begin()
     local restingSet = sets.resting
 
     if not restingSet then
+        debug_end()
         return {}
     end
 
@@ -616,6 +698,7 @@ function get_resting_set()
         mote_vars.set_breadcrumbs:append(state.RestingMode.current)
     end
 
+    debug_end()
     return restingSet
 end
 
@@ -626,8 +709,10 @@ end
 
 -- Get the default precast gear set.
 function get_precast_set(spell, spellMap)
+    debug_begin()
     -- If there are no precast sets defined, bail out.
     if not sets.precast then
+        debug_end()
         return {}
     end
 
@@ -664,6 +749,7 @@ function get_precast_set(spell, spellMap)
             mote_vars.set_breadcrumbs:append(cat)
         else
             mote_vars.set_breadcrumbs:clear()
+            debug_end()
             return {}
         end
     end
@@ -695,6 +781,7 @@ function get_precast_set(spell, spellMap)
     set_elemental_gear(spell)
     
     -- Return whatever we've constructed.
+    debug_end()
     return equipSet
 end
 
@@ -703,8 +790,10 @@ end
 -- Get the default midcast gear set.
 -- This builds on sets.midcast.
 function get_midcast_set(spell, spellMap)
+    debug_begin()
     -- If there are no midcast sets defined, bail out.
     if not sets.midcast then
+        debug_end()
         return {}
     end
     
@@ -731,6 +820,7 @@ function get_midcast_set(spell, spellMap)
             mote_vars.set_breadcrumbs:append(cat)
         else
             mote_vars.set_breadcrumbs:clear()
+            debug_end()
             return {}
         end
     end
@@ -751,6 +841,7 @@ function get_midcast_set(spell, spellMap)
     end
     
     -- Return whatever we've constructed.
+    debug_end()
     return equipSet
 end
 
@@ -758,8 +849,10 @@ end
 -- Get the default pet midcast gear set.
 -- This is built in sets.midcast.Pet.
 function get_pet_midcast_set(spell, spellMap)
+    debug_begin()
     -- If there are no midcast sets defined, bail out.
     if not sets.midcast or not sets.midcast.Pet then
+        debug_end()
         return {}
     end
 
@@ -790,12 +883,14 @@ function get_pet_midcast_set(spell, spellMap)
         end
     end
 
+    debug_end()
     return equipSet
 end
 
 
 -- Function to handle the logic of selecting the proper weaponskill set.
 function get_weaponskill_set(equipSet, spell, spellMap)
+    debug_begin()
     -- Custom handling for weaponskills
     local ws_mode = state.WeaponskillMode.current
     
@@ -830,12 +925,14 @@ function get_weaponskill_set(equipSet, spell, spellMap)
         mote_vars.set_breadcrumbs:append(ws_mode)
     end
     
+    debug_end()
     return equipSet
 end
 
 
 -- Function to handle the logic of selecting the proper ranged set.
 function get_ranged_set(equipSet, spell, spellMap)
+    debug_begin()
     -- Attach Combat Form and Combat Weapon to set checks
     if state.CombatForm.has_value and equipSet[state.CombatForm.value] then
         equipSet = equipSet[state.CombatForm.value]
@@ -861,6 +958,7 @@ function get_ranged_set(equipSet, spell, spellMap)
         end
     end
 
+    debug_end()
     return equipSet
 end
 
@@ -872,6 +970,7 @@ end
 -- Function to apply any active defense set on top of the supplied set
 -- @param baseSet : The set that any currently active defense set will be applied on top of. (gear set table)
 function apply_defense(baseSet)
+    debug_begin()
     if state.DefenseMode.current ~= 'None' then
         local defenseSet = sets.defense
 
@@ -888,6 +987,7 @@ function apply_defense(baseSet)
         baseSet = set_combine(baseSet, defenseSet)
     end
 
+    debug_end()
     return baseSet
 end
 
@@ -895,12 +995,14 @@ end
 -- Function to add kiting gear on top of the base set if kiting state is true.
 -- @param baseSet : The gear set that the kiting gear will be applied on top of.
 function apply_kiting(baseSet)
+    debug_begin()
     if state.Kiting.value then
         if sets.Kiting then
             baseSet = set_combine(baseSet, sets.Kiting)
         end
     end
 
+    debug_end()
     return baseSet
 end
 
@@ -911,6 +1013,7 @@ end
 
 -- Get a spell mapping for the spell.
 function get_spell_map(spell)
+    debug_begin()
     local defaultSpellMap = classes.SpellMaps[spell.english]
     local jobSpellMap
     
@@ -918,6 +1021,7 @@ function get_spell_map(spell)
         jobSpellMap = job_get_spell_map(spell, defaultSpellMap)
     end
 
+    debug_end()
     return jobSpellMap or defaultSpellMap
 end
 
@@ -927,6 +1031,7 @@ end
 -- Spell skill and spell type may further refine their selections based on
 -- custom class, spell name and spell map.
 function select_specific_set(equipSet, spell, spellMap)
+    debug_begin()
     -- Take the determined base equipment set and try to get the simple naming extensions that
     -- may apply to it (class, spell name, spell map).
     local namedSet = get_named_set(equipSet, spell, spellMap)
@@ -941,12 +1046,14 @@ function select_specific_set(equipSet, spell, spellMap)
             namedSet = equipSet[spell.type]
             mote_vars.set_breadcrumbs:append(spell.type)
         else
+            debug_end()
             return equipSet
         end
         
         namedSet = get_named_set(namedSet, spell, spellMap)
     end
 
+    debug_end()
     return namedSet or equipSet
 end
 
@@ -956,20 +1063,26 @@ end
 -- standard search order of custom class, spell name, and spell map.
 -- If no such set is found, it returns the original base set (equipSet) provided.
 function get_named_set(equipSet, spell, spellMap)
+    debug_begin()
     if equipSet then
         if classes.CustomClass and equipSet[classes.CustomClass] then
             mote_vars.set_breadcrumbs:append(classes.CustomClass)
+            debug_end()
             return equipSet[classes.CustomClass]
         elseif equipSet[spell.english] then
             mote_vars.set_breadcrumbs:append(spell.english)
+            debug_end()
             return equipSet[spell.english]
         elseif spellMap and equipSet[spellMap] then
             mote_vars.set_breadcrumbs:append(spellMap)
+            debug_end()
             return equipSet[spellMap]
         else
+            debug_end()
             return equipSet
         end
     end
+    debug_end()
 end
 
 
@@ -979,6 +1092,7 @@ end
 
 -- Called when the player's subjob changes.
 function sub_job_change(newSubjob, oldSubjob)
+    debug_begin()
     if user_setup then
         user_setup()
     end
@@ -988,11 +1102,13 @@ function sub_job_change(newSubjob, oldSubjob)
     end
     
     send_command('gs c update')
+    debug_end()
 end
 
 
 -- Called when the player's status changes.
 function status_change(newStatus, oldStatus)
+    debug_begin()
     -- init a new eventArgs
     local eventArgs = {handled = false}
     mote_vars.set_breadcrumbs:clear()
@@ -1014,6 +1130,7 @@ function status_change(newStatus, oldStatus)
         handle_equipping_gear(newStatus)
         display_breadcrumbs()
     end
+    debug_end()
 end
 
 
@@ -1021,6 +1138,7 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function buff_change(buff, gain)
+    debug_begin()
     -- Init a new eventArgs
     local eventArgs = {handled = false}
 
@@ -1039,6 +1157,7 @@ function buff_change(buff, gain)
             job_buff_change(buff, gain, eventArgs)
         end
     end
+    debug_end()
 end
 
 
@@ -1046,6 +1165,7 @@ end
 -- pet == pet gained or lost
 -- gain == true if the pet was gained, false if it was lost.
 function pet_change(pet, gain)
+    debug_begin()
     -- Init a new eventArgs
     local eventArgs = {handled = false}
 
@@ -1058,6 +1178,7 @@ function pet_change(pet, gain)
     if not eventArgs.handled then
         handle_equipping_gear(player.status)
     end
+    debug_end()
 end
 
 
@@ -1066,6 +1187,7 @@ end
 -- As such, don't automatically handle gear equips.  Only do so if directed
 -- to do so by the job.
 function pet_status_change(newStatus, oldStatus)
+    debug_begin()
     -- Init a new eventArgs
     local eventArgs = {handled = false}
 
@@ -1073,6 +1195,7 @@ function pet_status_change(newStatus, oldStatus)
     if job_pet_status_change then
         job_pet_status_change(newStatus, oldStatus, eventArgs)
     end
+    debug_end()
 end
 
 
@@ -1083,7 +1206,9 @@ end
 -- This is a debugging function that will print the accumulated set selection
 -- breadcrumbs for the default selected set for any given action stage.
 function display_breadcrumbs(spell, spellMap, action)
+    debug_begin()
     if not _settings.debug_mode then
+        debug_end()
         return
     end
     
@@ -1120,6 +1245,6 @@ function display_breadcrumbs(spell, spellMap, action)
         end
         add_to_chat(123, msg)
     end
+    debug_end()
 end
-
 

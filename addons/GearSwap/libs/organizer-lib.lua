@@ -2,6 +2,7 @@
 
 local org = {}
 register_unhandled_command(function(...)
+    debug_begin()
     local cmds = {...}
     for _,v in ipairs(cmds) do
         if S{'organizer','organize','org','o'}:contains(v:lower()) then
@@ -9,16 +10,20 @@ register_unhandled_command(function(...)
             return true
         end
     end
+    debug_end()
     return false
 end)
 
 
 function org.export_set()
+    debug_begin()
     if not sets then
         windower.add_to_chat(123,'Organizer Library: Cannot export your sets for collection because the table is nil.')
+        debug_end()
         return
     elseif not windower.dir_exists(windower.windower_path..'addons/organizer/') then
         windower.add_to_chat(123,'Organizer Library: The organizer addon is not installed. Activate it in the launcher.')
+        debug_end()
         return
     end
     
@@ -34,6 +39,7 @@ function org.export_set()
 
     if trans_item_list:length() == 0 then
         windower.add_to_chat(123,'Organizer Library: Your sets table is empty.')
+        debug_end()
         return
     end
     
@@ -107,6 +113,7 @@ function org.export_set()
     
     if #inv > inventory_max then
         windower.add_to_chat(123,'Organizer Library: Your sets table contains too many items.')
+        debug_end()
         return
     end
     
@@ -122,9 +129,11 @@ function org.export_set()
     end
 
     windower.send_command('wait 0.5;org o organizer-lib-file')
+    debug_end()
 end
 
 function org.simplify_entry(tab)
+    debug_begin()
     -- Some degree of this needs to be done in unpack_names or I won't be able to detect when two identical augmented items are equipped.
     local output = T{id=tab.id,name=tab.name,log_name=tab.log_name}
     local rare = gearswap.res.items[tab.id].flags:contains('Rare')
@@ -159,10 +168,12 @@ function org.simplify_entry(tab)
         end
         
     end
+    debug_end()
     return output
 end
 
 function org.identify_items(tab)
+    debug_begin()
     local name_to_id_map = {}
     local items = windower.ffxi.get_items()
     for id,inv in pairs(items) do
@@ -190,10 +201,12 @@ function org.identify_items(tab)
             trans[n]:extend(v)
         end
     end
+    debug_end()
     return trans
 end
 
 function org.unpack_names(ret_tab,up,tab_level,unpacked_table)
+    debug_begin()
     for i,v in pairs(tab_level) do
         local flag = false
         if type(v)=='table' and i ~= 'augments' and not ret_tab[tostring(tab_level[i])] then
@@ -220,10 +233,12 @@ function org.unpack_names(ret_tab,up,tab_level,unpacked_table)
             end
         end
     end
+    debug_end()
     return unpacked_table, ret_tab
 end
 
 function org.string_augments(tab)
+    debug_begin()
     local aug_str = ''
     if tab.augments then
         for aug_ind,augment in pairs(tab.augments) do
@@ -234,4 +249,5 @@ function org.string_augments(tab)
         if tab.augment ~= 'none' then aug_str = aug_str.."'"..augment.."'," end
     end
     if aug_str ~= '' then return '{\n'..aug_str..'}' end
+    debug_end()
 end
