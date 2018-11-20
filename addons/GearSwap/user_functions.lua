@@ -46,7 +46,7 @@ function debug_mode(boolean)
     elseif boolean == nil then
         _settings.debug_mode = true
     else
-        error('\nGearSwap: show_swaps() was passed an invalid value ('..tostring(boolean)..'). (true/no value/nil=on, false=off)', 2)
+        error('\nGearSwap: debug_mode() was passed an invalid value ('..tostring(boolean)..'). (true/no value/nil=on, false=off)', 2)
     end
 end
 
