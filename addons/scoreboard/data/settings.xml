@@ -71,5 +71,6 @@
                 <y>789</y>
             </pos>
         </display>
+        <visible>true</visible>
     </rayel>
 </settings>
