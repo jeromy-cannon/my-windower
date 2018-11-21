@@ -30,9 +30,10 @@ _addon.author = 'Byrth'
 _addon.commands = {'gs','gearswap'}
 
 if windower.file_exists(windower.addon_path..'data/bootstrap.lua') then
-    debugging = {windower_debug = true,command_registry = false,general=false,logging=false}
+    debugging = {windower_debug = true,command_registry = false,general=false,logging=true}
 else
-    debugging = {}
+    debugging = {windower_debug = true,command_registry = false,general=false,logging=true}
+    --debugging = {}
 end
 
 __raw = {lower = string.lower, upper = string.upper, debug=windower.debug,text={create=windower.text.create,
@@ -129,6 +130,35 @@ require 'validate'
 require 'flow'
 require 'triggers'
 
+function debug_begin()
+    -- if not _settings.debug_mode then
+    --     return
+    -- end
+    local myLoc = debug.getinfo(2, 'S')
+    local myLoc2 = debug.getinfo(2, 'n')
+    if not myLoc2.name then
+        myLoc2.name = 'undefined'
+    end
+    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...')
+    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...')
+end
+debug_begin()
+
+function debug_end()
+    -- if not _settings.debug_mode then
+    --     return
+    -- end
+    local myLoc = debug.getinfo(2, 'S')
+    local myLoc2 = debug.getinfo(2, 'n')
+    if not myLoc2.name then
+        myLoc2.name = 'undefined'
+    end
+    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
+    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
+end
+debug_end()
+
+
 initialize_packet_parsing()
 gearswap_disabled = false
 
@@ -143,8 +173,10 @@ windower.register_event('load',function()
 end)
 
 windower.register_event('unload',function ()
+    debug_begin()
     windower.debug('unload')
     user_pcall('file_unload')
+    debug_end()
     if logging then logfile:close() end
 end)
 

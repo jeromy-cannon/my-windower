@@ -8,6 +8,6 @@
     <uiscale>1</uiscale>
     <alwaysenablegamepad>false</alwaysenablegamepad>
     <allowwinkey>true</allowwinkey>
-    <logs>4</logs>
+    <logs>15</logs>
   </profile>
 </settings>

@@ -1094,8 +1094,11 @@ end
 -----------------------------------------------------------------------------------
 function logit(str)
     if debugging.logging then
-        if not logfile and windower.dir_exists('../addons/GearSwap/data/logs') then
-            logfile = io.open('../addons/GearSwap/data/logs/NormalLog'..tostring(os.clock())..'.log','w+')
+        --msg.addon_msg(123,'debugging.logging enabled')
+        --msg.addon_msg(123, ''..windower.addon_path..'data/logs')
+        if not logfile and windower.dir_exists(windower.addon_path..'data/logs') then
+            --msg.addon_msg(123,'creating log file, directory exists ../addons/GearSwap/data/logs')
+            logfile = io.open(windower.addon_path..'data/logs/NormalLog'..tostring(os.clock())..'.log','w+')
             logfile:write('GearSwap LOGGER HEADER\n')
         end
         logfile:write(str)

@@ -1,7 +1,7 @@
 <?xml version="1.1" ?>
 <settings>
     <global>
-        <logtofile>false</logtofile>        <!-- Set to true to output logging to a file. -->
+        <logtofile>true</logtofile>        <!-- Set to true to output logging to a file. -->
         <defaultfile>lua.log</defaultfile>    <!-- Default file to log to, if logging to file. -->
         <logcolor>207</logcolor>            <!-- Regular logging color. -->
         <errorcolor>167</errorcolor>        <!-- Error logging color. -->
