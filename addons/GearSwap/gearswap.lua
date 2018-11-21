@@ -140,7 +140,7 @@ function debug_begin()
         myLoc2.name = 'undefined'
     end
     --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...')
-    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...')
+    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...\n')
 end
 debug_begin()
 
@@ -154,10 +154,39 @@ function debug_end()
         myLoc2.name = 'undefined'
     end
     --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
-    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
+    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end\n')
 end
 debug_end()
 
+windower.debug = function (str) 
+    local myLoc = debug.getinfo(2, 'S')
+    local myLoc2 = debug.getinfo(2, 'n')
+    if not myLoc2.name then
+        myLoc2.name = 'undefined'
+    end
+    if not str then
+        str = 'undefined'
+    end
+    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
+    logit(string.format('%.2f:', os.clock())..myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':'..str..'\n')
+end
+
+msg.debugging = function(...)
+    local myLoc = debug.getinfo(2, 'S')
+    local myLoc2 = debug.getinfo(2, 'n')
+    if not myLoc2.name then
+        myLoc2.name = 'undefined'
+    end
+    if not str then
+        str = 'undefined'
+    end
+    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
+    printResult = ''
+    for i,v in ipairs(arg) do
+        printResult = printResult .. tostring(v) .. "\t"
+    end
+    logit(string.format('%.2f:', os.clock())..myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':'..printResult..'\n')
+end
 
 initialize_packet_parsing()
 gearswap_disabled = false

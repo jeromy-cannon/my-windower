@@ -41,7 +41,7 @@
 ---- none or ''
 -----------------------------------------------------------------------------------
 windower.register_event('outgoing text',function(original,modified,blocked,ffxi,extra_stuff,extra2)
-    windower.debug('outgoing text')
+    windower.debug('outgoing text'..', original='..original..',modified='..modified)
     if gearswap_disabled then return modified end
     
     local splitline = windower.from_shift_jis(windower.convert_auto_trans(modified)):gsub(' <wait %d+>',''):gsub('"(.-)"',function(str)
@@ -298,32 +298,39 @@ parse.i[0x029] = function (data)
     arr.message_id = data:unpack('H',0x19)%32768
     
     
-    windower.debug('action message')
+    windower.debug('action message, begin..., actor_id='..tostring(arr.actor_id)..', target_id='..tostring(arr.target_id)..', param_1='..tostring(arr.param_1)..', param_2='..tostring(arr.param_2)..', param_3='..tostring(arr.param_3)..', actor_index='..tostring(arr.actor_index)..', target_index='..tostring(arr.target_index)..', message_id='..tostring(arr.message_id))
     if T{6,20,113,406,605,646}:contains(arr.message_id) then -- death messages
+        windower.debug('death messages, begin...')
         local ts,tab = command_registry:delete_by_id(arr.target_id)
         if tab and tab.spell and tab.spell.prefix == '/pet' then
             equip_sets('pet_aftercast',nil,tab.spell)
         elseif tab and tab.spell then
             equip_sets('aftercast',nil,tab.spell)
         end
+        windower.debug('death messages, .....end')
         return
     end
     
     local tempplay = windower.ffxi.get_player()
     local prefix = ''
     if arr.actor_id ~= tempplay.id then
+        windower.debug('not player, begin...')
         if tempplay.pet_index then
             if arr.actor_id ~= windower.ffxi.get_mob_by_index(tempplay.pet_index).id then
+                windower.debug('not player, .....end1')
                 return
             else
                 prefix = 'pet_'
             end
         else
+            windower.debug('not player, .....end2')
             return
         end
+        windower.debug('not player, .....end3')
     end
     
     if unable_to_use:contains(arr.message_id) then
+        windower.debug('unable to use, begin...')
         logit('\n\n'..tostring(os.clock)..'(195) Event Action Message: '..tostring(message_id)..' Interrupt')
         local ts,tab = command_registry:find_by_time()
         
@@ -334,5 +341,7 @@ parse.i[0x029] = function (data)
             refresh_globals()
             equip_sets(prefix..'aftercast',ts,tab.spell)
         end
+        windower.debug('unable to use, .....end')
     end
+    windower.debug('action message, .....end, actor_id='..tostring(arr.actor_id)..', target_id='..tostring(arr.target_id)..', param_1='..tostring(arr.param_1)..', param_2='..tostring(arr.param_2)..', param_3='..tostring(arr.param_3)..', actor_index='..tostring(arr.actor_index)..', target_index='..tostring(arr.target_index)..', message_id='..tostring(arr.message_id))
 end
