@@ -40,6 +40,7 @@
 ---- before calling a player function.
 -----------------------------------------------------------------------------------
 function refresh_globals(user_event_flag)
+    myDebug('begin...')
     local current = os.clock()
     local dt = current - last_refresh
     if not user_event_flag or dt > 0.05 then
@@ -48,6 +49,7 @@ function refresh_globals(user_event_flag)
         refresh_group_info(dt,user_event_flag)
         last_refresh = current
     end
+    myDebug('.....end')
 end
 
 -----------------------------------------------------------------------------------

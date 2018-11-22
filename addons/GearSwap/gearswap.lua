@@ -130,63 +130,28 @@ require 'validate'
 require 'flow'
 require 'triggers'
 
-function debug_begin()
-    -- if not _settings.debug_mode then
-    --     return
-    -- end
+function myDebug(...)
     local myLoc = debug.getinfo(2, 'S')
     local myLoc2 = debug.getinfo(2, 'n')
     if not myLoc2.name then
         myLoc2.name = 'undefined'
     end
-    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...')
-    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':begin...\n')
-end
-debug_begin()
-
-function debug_end()
-    -- if not _settings.debug_mode then
-    --     return
-    -- end
-    local myLoc = debug.getinfo(2, 'S')
-    local myLoc2 = debug.getinfo(2, 'n')
-    if not myLoc2.name then
-        myLoc2.name = 'undefined'
-    end
-    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
-    logit(myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end\n')
-end
-debug_end()
-
-windower.debug = function (str) 
-    local myLoc = debug.getinfo(2, 'S')
-    local myLoc2 = debug.getinfo(2, 'n')
-    if not myLoc2.name then
-        myLoc2.name = 'undefined'
-    end
-    if not str then
-        str = 'undefined'
-    end
-    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
-    logit(string.format('%.2f:', os.clock())..myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':'..str..'\n')
-end
-
-msg.debugging = function(...)
-    local myLoc = debug.getinfo(2, 'S')
-    local myLoc2 = debug.getinfo(2, 'n')
-    if not myLoc2.name then
-        myLoc2.name = 'undefined'
-    end
-    if not str then
-        str = 'undefined'
-    end
-    --msg.addon_msg(123,myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':.....end')
     printResult = ''
     for i,v in ipairs(arg) do
-        printResult = printResult .. tostring(v) .. "\t"
+        if v then
+            printResult = printResult .. tostring(v) .. ">"
+        else
+            printResult = printResult .. tostring('nil') .. ">"
+        end
     end
     logit(string.format('%.2f:', os.clock())..myLoc.short_src..':'..myLoc.linedefined..':'..myLoc2.name..':'..printResult..'\n')
 end
+
+windower.debug = myDebug
+msg.debugging = myDebug
+windower.add_to_chat = myDebug
+msg.add_to_chat = myDebug
+add_to_chat = myDebug
 
 initialize_packet_parsing()
 gearswap_disabled = false
@@ -202,10 +167,8 @@ windower.register_event('load',function()
 end)
 
 windower.register_event('unload',function ()
-    debug_begin()
     windower.debug('unload')
     user_pcall('file_unload')
-    debug_end()
     if logging then logfile:close() end
 end)
 
@@ -339,7 +302,7 @@ function disenable(tab,funct,functname,pol)
 end
 
 function incoming_chunk(id,data,modified,injected,blocked)
-    windower.debug('incoming chunk '..id)
+    windower.debug('incoming chunk '..id, ', id(x)=', string.format('%x', id))
     
     if next_packet_events and next_packet_events.sequence_id ~= data:unpack('H',3) then
         if not next_packet_events.globals_update or next_packet_events.globals_update ~= data:unpack('H',3) then
@@ -363,14 +326,15 @@ function incoming_chunk(id,data,modified,injected,blocked)
             next_packet_events = nil
         end
     end
-    
+
+    myDebug('injected=',injected,', id=', id, ', id(x)=', string.format('%x', id))
     if not injected and parse.i[id] then
         parse.i[id](data,blocked)
     end
 end
 
 function outgoing_chunk(id,original,data,injected,blocked)
-    windower.debug('outgoing chunk '..id)
+    windower.debug('outgoing chunk '..id, ', blocked=', blocked, ', id(x)=', string.format('%x', id))
     
     if not blocked and parse.o[id] then
         parse.o[id](data,injected)

@@ -175,7 +175,11 @@ end)
 -----------------------------------------------------------------------------------
 parse.i[0x028] = function (data)
     local act = windower.packets.parse_action(data)
-    if gearswap_disabled or act.category == 1 then return end
+    myDebug('begin...act.category=',act.category,', act.actor_id=',act.actor_id, ', player.id=', player.id)
+    if gearswap_disabled or act.category == 1 then 
+        myDebug('exit1')
+        return 
+    end
     
 --    local spell_res = ActionPacket.new(act):get_spell()
         
@@ -189,6 +193,7 @@ parse.i[0x028] = function (data)
     end
 
     if act.actor_id ~= player.id and act.actor_id ~= pet_id then
+        myDebug('exit2')
         return -- If the action is not being used by the player, the pet, or is a melee attack then abort processing.
     end
     
@@ -201,12 +206,16 @@ parse.i[0x028] = function (data)
     local spell = get_spell(act)
 --    if not spell_res or (spell.english ~= spell_res.english) then print('Did not match.',spell.english,spell_res) end
     
-    if spell then logit('\n\n'..tostring(os.clock)..'(178) Event Action: '..tostring(spell[language])..' '..tostring(act.category))
-    else logit('\n\nNil spell detected') end
+    if spell then 
+        logit('\n\n'..tostring(os.clock)..'(178) Event Action: '..tostring(spell[language])..' '..tostring(act.category)..'\n')
+    else 
+        logit('\n\nNil spell detected') 
+    end
     
     if spell and spell[language] then
         spell.target = target_complete(windower.ffxi.get_mob_by_id(act.targets[1].id))
         spell.action_type = action_type_map[unify_prefix[spell.prefix or 'Monster']]
+        myDebug('spell.target=',spell.target,',spell.action_type=',spell.action_type)
     elseif S{84,78}:contains(act.targets[1].actions[1].message) then -- "Paralyzed" and "too far away" respectively
         local ts,tab = command_registry:delete_by_id(act.targets[1].id)
         if tab and tab.spell and tab.spell.prefix == '/pet' then 
@@ -214,11 +223,14 @@ parse.i[0x028] = function (data)
             equip_sets('pet_aftercast',nil,tab.spell)
         elseif tab and tab.spell then
             tab.spell.interrupted = true
+            myDebug('spell interrupted')
             equip_sets('aftercast',nil,tab.spell)
         end
+        myDebug('exit3')
         return
     else
         if debugging.general then windower.send_command('input /echo Incoming Action packet did not generate a spell/aftercast.')end
+        myDebug('exit4')
         return
     end
     
@@ -240,15 +252,19 @@ parse.i[0x028] = function (data)
         if uses[act.category] and act.param == 28787 then
             spell.action_type = 'Interruption'
             spell.interrupted = true
+            myDebug('Interruption...')
         else
             spell.value = act.targets[1].actions[1].param
+            myDebug('spell.value=',spell.value)
         end
         if ts then --or spell.prefix == '/item' then
             -- Only aftercast things that were precasted.
             -- Also, there are some actions (like being paralyzed while casting Ninjutsu) that sends two result action packets. Block the second packet.
             refresh_globals()
             command_registry[ts].midaction = false
+            myDebug('aftercast about to begin...')
             equip_sets(prefix..'aftercast',ts,spell)
+            myDebug('aftercast finished .....end')
         elseif debugging.command_registry then
             msg.debugging('Hitting Aftercast without detecting an entry in command_registry')
         end
@@ -260,7 +276,9 @@ parse.i[0x028] = function (data)
             -- Also, there are some actions (like being paralyzed while casting Ninjutsu) that sends two result action packets. Block the second packet.
             refresh_globals()
             if command_registry[ts] then command_registry[ts].midaction = false end
+            myDebug('aftercast with interruption begin...')
             equip_sets(prefix..'aftercast',ts,spell)
+            myDebug('aftercast with interruption .....end')
         elseif debugging.command_registry then
             msg.debugging('Hitting Aftercast without detecting an entry in command_registry')
         end
@@ -271,6 +289,7 @@ parse.i[0x028] = function (data)
         command_registry[ts].pet_midaction = true
         equip_sets('pet_midcast',ts,spell)
     end
+    myDebug('exit5')
 end
 
 
