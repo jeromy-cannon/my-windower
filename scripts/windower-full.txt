@@ -4,10 +4,10 @@ load infobar
 load lightluggage
 load timers
 lua load answeringmachine
+lua load checkparam
 lua load clock
 lua load debuffed 
 lua load gametime
-lua load gearswap
 lua load giltracker
 lua load linker
 lua load logger
@@ -19,7 +19,5 @@ lua load thtracker
 lua load tparty
 lua load trusts
 sb reset
-sb visible on
-gs showswaps
 list
 lua list

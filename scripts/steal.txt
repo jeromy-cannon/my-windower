@@ -1,0 +1,8 @@
+input /equipset 6
+input /ja "Steal" <t>
+wait 2
+input /equipset 1
+input /ja "Collaborator" <p4>
+wait 1
+input /ja "Mug" <t>
+input /echo steal:end

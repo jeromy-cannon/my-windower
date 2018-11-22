@@ -1,3 +1,0 @@
-input /ja "Sneak Attack" <me>
-wait 2
-input /ws "Viper Bite" <t>

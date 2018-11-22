@@ -1,0 +1,13 @@
+input /equipset 8
+input /ja "Sneak Attack" <me>
+wait 1
+input /ja "Trick Attack" <me>
+wait 4
+input /equipset 1
+input /echo sata:end
+input /ja "Collaborator" <p4>
+wait 1
+input /ja "Feint" <me>
+wait 1
+input /ja "Bully" <t>
+wait 2

@@ -1,3 +1,0 @@
-input /ja "Trick Attack" <me>
-wait 2
-input /ws "Shark Bite" <t>

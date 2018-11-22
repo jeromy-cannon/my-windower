@@ -20,9 +20,12 @@ exec windower-full.txt
 bind f12 showfps
 bind sysrq screenshot jpg hide
 bind ^v paste
-bind ^z input /ja "Flee" <me>
+bind ^z exec flee.txt 
 bind !m input /map
 bind f1 exec help.txt
+bind ^a input /equipset 1
+bind ^s exec sa.txt
+bind ^t exec ta.txt
 
 alias aspir exec a-sam.txt
 alias battle-bare exec battle-bare.txt
@@ -47,7 +50,7 @@ alias exp input /item "Echad Ring" <me>
 alias exp2 exec exp2.txt
 alias explore exec explore.txt
 alias feint input /ja "Feint" <me>
-alias flee input /ja "Flee" <me>
+alias flee exec flee.txt
 alias gravity exec d-flour.txt
 alias gust input /ws "Gust Slash" <t>
 alias hide input /ja "Hide" <me>
@@ -60,25 +63,14 @@ alias provoke exec a-flour.txt
 alias pull input /ra <t>
 alias reload-gs unload-gs;load-gs;gs showswaps;gs debugmode
 alias rflour exec r-flour.txt
-alias sa input /ja "Sneak Attack" <me>
-alias saae exec sa-ae.txt
-alias savb exec sa-vb.txt
-alias sad exec sa-d.txt
-alias sags exec sa-gs.txt
-alias sas exec sa-s.txt 
-alias sasb exec sa-sb.txt
-alias shadow input /ws "Shadowstitch" <t>
-alias sharkbite input /ws "Shark Bite" <t>
+alias sa exec sa.txt
+alias sata exec sata.txt
 alias sjig exec s-jig.txt
 alias sstep exec s-step.txt
-alias steal input /ja "Steal" <t>
-alias ta input /ja "Trick Attack" <me>
-alias taae exec ta-ae.txt
-alias tad exec ta-d.txt
-alias tasb exec ta-sb.txt
+alias steal exec steal.txt
+alias ta exec ta.txt
 alias undetect exec undetectable.txt
 alias unload-all exec unload-all.txt
 alias unload-gs lua unload gearswap
-alias vb input /ws "Viper Bite" <t>
 alias vflour exec v-flour.txt
 alias warp exec warp.txt
