@@ -26,6 +26,7 @@ bind f1 exec help.txt
 bind ^a input /equipset 1
 bind ^s exec sa.txt
 bind ^t exec ta.txt
+bind ^k input /equipset 9
 
 alias aspir exec a-sam.txt
 alias battle-bare exec battle-bare.txt
