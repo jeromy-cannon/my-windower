@@ -17,17 +17,6 @@ showfps 0
 
 exec windower-full.txt
 
-bind f12 showfps
-bind sysrq screenshot jpg hide
-bind ^v paste
-bind ^z exec flee.txt 
-bind !m input /map
-bind f1 exec help.txt
-bind ^a input /equipset 1
-bind ^s exec sa.txt
-bind ^t exec ta.txt
-bind ^k input /equipset 9
-
 alias aspir exec dnc/a-sam.txt
 alias battle-bare exec battle-bare.txt
 alias battle-debug exec battle-debug.txt
@@ -76,3 +65,14 @@ alias unload-all exec unload-all.txt
 alias unload-gs lua unload gearswap
 alias vflour exec dnc/v-flour.txt
 alias warp exec rings/warp.txt
+
+bind f12 showfps
+bind sysrq screenshot jpg hide
+bind ^v paste
+bind ^z flee
+bind !m input /map
+bind f1 exec help.txt
+bind ^a input /equipset 1
+bind ^s sa
+bind ^t ta
+bind ^k input /equipset 9
