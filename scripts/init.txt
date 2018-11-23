@@ -28,51 +28,51 @@ bind ^s exec sa.txt
 bind ^t exec ta.txt
 bind ^k input /equipset 9
 
-alias aspir exec a-sam.txt
+alias aspir exec dnc/a-sam.txt
 alias battle-bare exec battle-bare.txt
 alias battle-debug exec battle-debug.txt
 alias blink input /ma "Utsusemi: Ichi" <me>
 alias bully input /ja "Bully" <t>
-alias cp exec cp.txt
+alias cp exec rings/cp.txt
 alias conspir input /ja "Conspirator" <me>
-alias cura exec d-waltz.txt
-alias cure exec cure-waltz.txt
-alias cure2 exec cure-waltz-2.txt
-alias cure3 exec cure-waltz-3.txt
+alias cura exec dnc/d-waltz.txt
+alias cure exec dnc/cure-waltz.txt
+alias cure2 exec dnc/cure-waltz-2.txt
+alias cure3 exec dnc/cure-waltz-3.txt
 alias cyclone input /ws "Cyclone" <t>
-alias defdown exec b-step.txt
-alias dem exec dem.txt
+alias defdown exec dnc/b-step.txt
+alias dem exec rings/dem.txt
 alias despoil input /ja "Despoil" <t>
 alias dodge input /ja "Perfect Dodge" <me>
-alias drain exec d-sam.txt
-alias drain2 exec d-sam-2.txt
-alias erase exec h-waltz.txt
-alias evadown exec q-step.txt
-alias exp exec exp.txt
-alias exp2 exec exp2.txt
+alias drain exec dnc/d-sam.txt
+alias drain2 exec dnc/d-sam-2.txt
+alias erase exec dnc/h-waltz.txt
+alias evadown exec dnc/q-step.txt
+alias exp exec rings/exp.txt
+alias exp2 exec rings/exp2.txt
 alias explore exec explore.txt
 alias feint input /ja "Feint" <me>
-alias flee exec flee.txt
-alias gravity exec d-flour.txt
+alias flee exec thf/flee.txt
+alias gravity exec dnc/d-flour.txt
 alias gust input /ws "Gust Slash" <t>
 alias hide input /ja "Hide" <me>
-alias hsam exec haste-samba.txt
+alias hsam exec dnc/haste-samba.txt
 alias load-gs lua load gearswap
 alias mount input /mount "Spectral chair"
 alias mug input /ja "Mug" <t>
-alias panic exec panic.txt
-alias provoke exec a-flour.txt
+alias panic exec thf/panic.txt
+alias provoke exec dnc/a-flour.txt
 alias pull input /ra <t>
 alias reload-gs unload-gs;load-gs;gs showswaps;gs debugmode
-alias rflour exec r-flour.txt
-alias sa exec sa.txt
-alias sata exec sata.txt
-alias sjig exec s-jig.txt
-alias sstep exec s-step.txt
-alias steal exec steal.txt
-alias ta exec ta.txt
+alias rflour exec dnc/r-flour.txt
+alias sa exec thf/sa.txt
+alias sata exec thf/sata.txt
+alias sjig exec dnc/s-jig.txt
+alias sstep exec dnc/s-step.txt
+alias steal exec thf/steal.txt
+alias ta exec thf/ta.txt
 alias undetect exec undetectable.txt
 alias unload-all exec unload-all.txt
 alias unload-gs lua unload gearswap
-alias vflour exec v-flour.txt
-alias warp exec warp.txt
+alias vflour exec dnc/v-flour.txt
+alias warp exec rings/warp.txt

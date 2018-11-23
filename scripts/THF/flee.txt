@@ -2,5 +2,6 @@ input /equipset 3
 input /ja "Flee" <me>
 wait 2
 input /equipset 1
+wait 1
 input /equipset 9
 input /echo flee:end
