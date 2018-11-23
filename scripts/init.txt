@@ -33,6 +33,7 @@ alias battle-bare exec battle-bare.txt
 alias battle-debug exec battle-debug.txt
 alias blink input /ma "Utsusemi: Ichi" <me>
 alias bully input /ja "Bully" <t>
+alias cp exec cp.txt
 alias conspir input /ja "Conspirator" <me>
 alias cura exec d-waltz.txt
 alias cure exec cure-waltz.txt
@@ -47,7 +48,7 @@ alias drain exec d-sam.txt
 alias drain2 exec d-sam-2.txt
 alias erase exec h-waltz.txt
 alias evadown exec q-step.txt
-alias exp input /item "Echad Ring" <me>
+alias exp exec exp.txt
 alias exp2 exec exp2.txt
 alias explore exec explore.txt
 alias feint input /ja "Feint" <me>

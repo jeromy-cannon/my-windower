@@ -1,5 +1,15 @@
 input /equip R.ring "Emperor Band"
+input /echo Exp2 in 15
 wait 5
+input /echo Exp2 in 10
+wait 5
+input /echo Exp2 in 5
+wait 2
+input /echo Exp2 in 3
+wait 1
+input /echo Exp2 in 2
+wait 1
+input /echo Exp2 in 1
+wait 1
 input /item "Emperor Band" <me>
-wait 10
-input /equip R.ring "Warp Ring"
+input /echo Exp2...
