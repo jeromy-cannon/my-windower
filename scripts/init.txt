@@ -22,7 +22,7 @@ alias battle-bare exec battle-bare.txt
 alias battle-debug exec battle-debug.txt
 alias blink input /ma "Utsusemi: Ichi" <me>
 alias bully input /ja "Bully" <t>
-alias cp exec rings/cp.txt
+alias cp rings "Trizek Ring"
 alias conspir input /ja "Conspirator" <me>
 alias cura exec dnc/d-waltz.txt
 alias cure exec dnc/cure-waltz.txt
@@ -30,15 +30,15 @@ alias cure2 exec dnc/cure-waltz-2.txt
 alias cure3 exec dnc/cure-waltz-3.txt
 alias cyclone input /ws "Cyclone" <t>
 alias defdown exec dnc/b-step.txt
-alias dem exec rings/dem.txt
+alias dem rings "Dem Ring"
 alias despoil input /ja "Despoil" <t>
 alias dodge input /ja "Perfect Dodge" <me>
 alias drain exec dnc/d-sam.txt
 alias drain2 exec dnc/d-sam-2.txt
 alias erase exec dnc/h-waltz.txt
 alias evadown exec dnc/q-step.txt
-alias exp exec rings/exp.txt
-alias exp2 exec rings/exp2.txt
+alias exp rings "Echad Ring"
+alias exp2 rings "Emperor Band"
 alias explore exec explore.txt
 alias feint input /ja "Feint" <me>
 alias flee exec thf/flee.txt
@@ -64,7 +64,7 @@ alias undetect exec undetectable.txt
 alias unload-all exec unload-all.txt
 alias unload-gs lua unload gearswap
 alias vflour exec dnc/v-flour.txt
-alias warp exec rings/warp.txt
+alias warp rings "Warp Ring"
 
 bind f12 showfps
 bind sysrq screenshot jpg hide

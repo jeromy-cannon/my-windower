@@ -18,6 +18,7 @@ lua load speedchecker
 lua load thtracker
 lua load tparty
 lua load trusts
+lua load rings
 sb reset
 list
 lua list
