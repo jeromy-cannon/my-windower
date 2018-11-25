@@ -19,6 +19,8 @@ input /echo terminate=force close playonline
 input /echo game_exit=exits the game gracefully
 input /echo window_toggleframe=toggles the window border frame
 input /echo gs export all=export the name of all of your equipment and items
+input /echo pcmd [add/leave/kick/breakup/leader] <t/name>
+input /echo befriend <t/name>
 input /echo ----------- end ----------------------
 listbinds
 listaliases

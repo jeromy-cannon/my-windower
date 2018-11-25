@@ -1,16 +1,24 @@
 unload delaymenot
 unload ffxidb
 unload infobar
+unload lightluggage
 unload timers
+lua unload answeringmachine
+lua unload checkparam
 lua unload clock
 lua unload debuffed 
+lua unload gametime
 lua unload giltracker
+lua unload latentchecker
 lua unload linker
 lua unload logger
+lua unload mountmuzzle
 lua unload pointwatch
+lua unload thtracker
 lua unload tparty
 lua unload trusts
 lua unload scoreboard
+lua unload speedchecker
 lua unload gearswap
 
 lua list

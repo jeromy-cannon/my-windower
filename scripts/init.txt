@@ -58,6 +58,7 @@ alias sa exec thf/sa.txt
 alias sata exec thf/sata.txt
 alias sjig exec dnc/s-jig.txt
 alias sstep exec dnc/s-step.txt
+alias sitchair input /sitchair 2
 alias steal exec thf/steal.txt
 alias ta exec thf/ta.txt
 alias undetect exec undetectable.txt
