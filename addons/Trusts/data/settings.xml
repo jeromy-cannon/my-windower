@@ -5,18 +5,12 @@
         <language>English</language>
         <sets>
             <battle>
-                <1>Valaineral</1>
-                <2>Karaha-Baruha</2>
-                <3>Semih Lafihna</3>
-                <4>Shantotto II</4>
-            </battle>
-            <battle2>
                 <1>Trion</1>
                 <2>Apururu (UC)</2>
                 <3>Semih Lafihna</3>
                 <4>Shantotto II</4>
                 <5>Qultada</5>
-            </battle2>
+            </battle>
             <bomb>
                 <1>Rughadjeen</1>
                 <2>Karaha-Baruha</2>
@@ -24,12 +18,19 @@
                 <4>Ullegore</4>
             </bomb>
             <default>
-                <1>Brygid</1>
-                <2>Sakura</2>
-                <3>Kuyin Hathdenna</3>
-                <4>Joachim</4>
-                <5>Joachim</5>
+                <1>Trion</1>
+                <2>Apururu (UC)</2>
+                <3>Semih Lafihna</3>
+                <4>Shantotto II</4>
+                <5>Kupofried</5>
             </default>
+            <level>
+                <1>Trion</1>
+                <2>Apururu (UC)</2>
+                <3>Semih Lafihna</3>
+                <4>Shantotto II</4>
+                <5>Kupofried</5>
+            </level>
             <scary>
                 <1>Teodor</1>
                 <2>Darrcuiln</2>
@@ -38,10 +39,10 @@
             </scary>
             <solo>
                 <1>Joachim</1>
-                <2>Brygid</2>
-                <3>Sakura</3>
-                <4>Uka Totlihn</4>
-                <5>Qultada</5>
+                <2>Sakura</2>
+                <3>Qultada</3>
+                <4>Kupofried</4>
+                <5>King of Hearts</5>
             </solo>
         </sets>
         <wait>
