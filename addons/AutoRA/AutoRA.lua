@@ -49,6 +49,7 @@ function start()
 	elseif player.status == 0 then
 		auto = 0
 	end
+	auto = 1
 	shoot()
 end
 
@@ -106,38 +107,38 @@ windower.register_event('action',function (act)
 	
 	if ((actor == (player.id or player.index))) then
 		if category == 2 then
-			if player.vitals['tp'] < 1000 then
+			-- if player.vitals['tp'] < 1000 then
 				if auto == 1 then
-					if  player.status == 1 then
+					-- if  player.status == 1 then
 						auto = 1
-					elseif  player.status == 0 then
-						auto = 0
-						return
-					end
+					-- elseif  player.status == 0 then
+					-- 	auto = 0
+					-- 	return
+					-- end
 				end
 				if auto == 1 then
 					windower.send_command('@wait 1.5;input /shoot <t>')
 				elseif auto == 0 then
 				end
-			else
-				if halt_on_tp == true then
-					windower.add_to_chat(17, 'AutoRA  HALTING AT 1000 TP ~~~~~~~~~~~~~~')
-					return
-				else
-					if auto == 1 then
-						if  player.status == 1 then
-							auto = 1
-						elseif  player.status == 0 then
-							auto = 0
-							return
-						end
-					end
-					if auto == 1 then
-						windower.send_command('@wait 1.5;input /shoot <t>')
-					elseif auto == 0 then
-					end
-				end
-			end
+			-- else
+			-- 	if halt_on_tp == true then
+			-- 		windower.add_to_chat(17, 'AutoRA  HALTING AT 1000 TP ~~~~~~~~~~~~~~')
+			-- 		return
+			-- 	else
+			-- 		if auto == 1 then
+			-- 			if  player.status == 1 then
+			-- 				auto = 1
+			-- 			elseif  player.status == 0 then
+			-- 				auto = 0
+			-- 				return
+			-- 			end
+			-- 		end
+			-- 		if auto == 1 then
+			-- 			windower.send_command('@wait 1.5;input /shoot <t>')
+			-- 		elseif auto == 0 then
+			-- 		end
+			-- 	end
+			-- end
 		end
 	end
 end)
