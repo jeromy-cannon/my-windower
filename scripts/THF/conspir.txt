@@ -1,0 +1,8 @@
+input /ja "Conspirator" <me>
+wait 1
+input /ja "Collaborator" <p4>
+wait 1
+input /ja "Feint" <me>
+wait 1
+input /ja "Bully" <t>
+wait 2

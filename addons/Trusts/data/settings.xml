@@ -6,7 +6,7 @@
         <sets>
             <battle>
                 <1>Trion</1>
-                <2>Apururu (UC)</2>
+                <2>Karaha-Baruha</2>
                 <3>Semih Lafihna</3>
                 <4>Shantotto II</4>
                 <5>Qultada</5>
@@ -25,25 +25,32 @@
                 <5>Kupofried</5>
             </default>
             <kanaami>
-                <1>Trion</1>
-                <2>Shantotto II</2>
-                <3>King of Hearts</3>
-                <4>Semih Lafihna</4>
+                <1>Valaineral</1>
+                <2>Karaha-Baruha</2>
+                <3>Semih Lafihna</3>
+                <4>Shantotto II</4>
             </kanaami>
             <level>
                 <1>Trion</1>
-                <2>Apururu (UC)</2>
+                <2>Karaha-Baruha</2>
                 <3>Semih Lafihna</3>
                 <4>Shantotto II</4>
                 <5>Kupofried</5>
             </level>
-            <level2>
+            <level-kupo>
                 <1>Trion</1>
                 <2>King of Hearts</2>
                 <3>Semih Lafihna</3>
                 <4>Shantotto II</4>
                 <5>Kupofried</5>
-            </level2>
+            </level-kupo>
+            <level-exp>
+                <1>Trion</1>
+                <2>King of Hearts</2>
+                <3>Shantotto II</3>
+                <4>Kupofried</4>
+                <5>Qultada</5>
+            </level-exp>
             <scary>
                 <1>Teodor</1>
                 <2>Darrcuiln</2>
@@ -57,6 +64,13 @@
                 <4>Kupofried</4>
                 <5>King of Hearts</5>
             </solo>
+            <weaponskill>
+                <1>Shantotto II</1>
+                <2>Semih Lafihna</2>
+                <3>King of Hearts</3>
+                <4>Kupofried</4>
+                <5>Qultada</5>
+            </weaponskill>
         </sets>
         <wait>
             <aftercast>4</aftercast>

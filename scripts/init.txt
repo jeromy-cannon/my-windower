@@ -23,7 +23,7 @@ alias battle-debug exec battle-debug.txt
 alias blink input /ma "Utsusemi: Ichi" <me>
 alias bully input /ja "Bully" <t>
 alias cp rings "Trizek Ring"
-alias conspir input /ja "Conspirator" <me>
+alias conspir exec thf/conspir.txt
 alias cura exec dnc/d-waltz.txt
 alias cure exec dnc/cure-waltz.txt
 alias cure2 exec dnc/cure-waltz-2.txt
