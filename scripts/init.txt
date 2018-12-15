@@ -9,7 +9,7 @@ game_exitprompt 0
 console_position 15 100
 console_color 255 255 0 0
 console_displayactivity 1
-console_fadedelay 15000
+console_fadedelay 1500
 console_screendir screenshots
 showfps 1
 fps_position 0 18
