@@ -47,7 +47,15 @@ alias gust input /ws "Gust Slash" <t>
 alias hide input /ja "Hide" <me>
 alias hsam exec dnc/haste-samba.txt
 alias load-gs lua load gearswap
-alias mount input /mount "Spectral chair"
+alias mount-chair input /mount "Spectral chair"
+alias mount input /mount "Tulfaire"
+alias mount-pot input /mount "Magic Pot"
+alias mount-war input /mount "Warmachine"
+alias mount-x input /mount "Xzomit"
+alias mount-hippo input /mount "Hippogryph"
+alias mount-coe input /mount "Coeurl"
+alias mount-tiger input /mount "Tiger"
+alias mount-goob input /mount "Goobbue"
 alias mug input /ja "Mug" <t>
 alias panic exec thf/panic.txt
 alias provoke exec dnc/a-flour.txt
